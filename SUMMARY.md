@@ -14,7 +14,7 @@
    * [Matching, Guards and Scope of Variables](part1/matching.md)
    * [More About Lists](part1/morelists.md)
    * [Conditionals](part1/conds.md)
-   * [Built-in Functions)(part1/bifs.md)
+   * [Built-in Functions](part1/bifs.md)
    * [Higher Order Functions](part1/hofs.md)
 * [Concurrent Programming](part2/README.md)
    * [Processes](part2/processes.md)
@@ -32,8 +32,4 @@
    * [Records](part4/records.md)
    * [Macros](part4/macros.md)
 * [Conclusion](part4/conclusion.md)
-* [Getting LFE](1.md)
-* [The LFE REPL](2.md)
-* [LFE Modules](3.md)
-* [Behind the Scenes](4.md)
 
