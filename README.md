@@ -44,7 +44,7 @@ This tutorial covers the following topics:
 
 * Sequential programming (installing LFE, the REPL, functions, modules, data
   types, the standard library, writing to the terminal, pattern matching,
-  guards, conditionals, built-in functiions, and higher-order functions)
+  guards, conditionals, built-in functions, and higher-order functions)
 * Concurrent programming (processes, message passing, registered processes,
   and distributed programming)
 * Robustness (timeouts and error handling)
