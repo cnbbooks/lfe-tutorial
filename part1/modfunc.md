@@ -1,10 +1,6 @@
 ## Modules and Functions
 
-
-## 3 Hitting the Code
-
-
-### 3.1 Creating a Simple Module
+### Creating a Simple Module
 
 If you want to create your module in the same terminal window, you'll need to quit the LFE REPL:
 
@@ -40,7 +36,7 @@ Hey, that function looks familiar! Save the file and exit your editor. If you ex
 $ ./bin/lfe
 ```
 
-### 3.2 Using Your Module
+### Compiling and Using Your Module
 
 Back in your REPL, compile the file you just created:
 
