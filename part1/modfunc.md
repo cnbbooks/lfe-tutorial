@@ -1,14 +1,8 @@
-# LFE Code
+## Modules and Functions
 
 
 ## 3 Hitting the Code
 
-<img src="https://raw.github.com/lfe/docs/master/images/smash.jpg"
-     style="float: right; padding-left: 1em;">It may not seem like it,
-but we're off to a pretty fast start. Time to put the brakes on, though, 'cause you're gonna want to see this next
-part in slow motion.
-
-We've just seen some fancy fingerwork in the REPL ... but what about some *real* code? What does a **project** look like? Well, if you want to see a full project, be sure to checkout the [lfetool Quick Start](). Creating a project by hand is too much for a bare-bones quick-start. But we can take a look at an LFE *module*. How does that sound?
 
 ### 3.1 Creating a Simple Module
 
@@ -69,72 +63,4 @@ As you noticed above, when we called functions from the Erlang standard library,
 > (sample-module:my-sum 1 6000)
 36006000
 ```
-
-### 3.3 Going Deep
-
-Here's something a little more involved you may enjoy, from the examples in the
-LFE source code:
-
-```lisp
-(defmodule messenger-back
- (export (print-result 0) (send-message 2)))
-
-(defun print-result ()
-  (receive
-    ((tuple pid msg)
-      (io:format "Received message: '~s'~n" (list msg))
-      (io:format "Sending message to process ~p ...~n" (list pid))
-      (! pid (tuple msg))
-      (print-result))))
-
-(defun send-message (calling-pid msg)
-  (let ((spawned-pid (spawn 'messenger-back 'print-result ())))
-    (! spawned-pid (tuple calling-pid msg))))
-```
-
-That bit of code demonstrates one of Erlang's core features in lovely Lisp
-syntax: message passing. When loaded into the REPL, that example shows some
-bidirectional message passing between the LFE shell and a spawned process.
-
-Want to give it a try? Start by compiling the example module:
-
-```lisp
-> (c "examples/messenger-back.lfe")
-#(module messenger-back)
-```
-
-Next, let's send two messages to another Erlang process (in this case, we'll
-send it to our REPL process, ``(self)``:
-
-```lisp
-> (messenger-back:send-message (self) "And what does it say now?")
-#(<0.26.0> "And what does it say now?")
-Received message: 'And what does it say now?'
-Sending message to process <0.26.0> ...
-> (messenger-back:send-message (self) "Mostly harmless.")
-#(<0.26.0> "Mostly harmless.")
-Received message: 'Mostly harmless.'
-Sending message to process <0.26.0> ...
-```
-
-In the above calls, for each message sent we got a reply acknowledging the
-message (because the example was coded like that). But what about the receiver
-itself? What did it, our REPL process, see? We can flush the message
-queue in the REPL to find out:
-
-```lisp
-> (c:flush)
-Shell got {"And what does it say now?"}
-Shell got {"Mostly harmless."}
-ok
-```
-
-If you found this last bit interesting and want to step through a tutorial on
-Erlang's light-weight threads in more detail, you may enjoy
-[this tutorial](http://docs.lfe.io/tutorials/processes/1.html).
-
-
-### Next Stop
-
-Next we'll see what other resources are available for learning LFE, wrapping up the quick start and pointing you in some directions for your next LFE adventures ...
 
