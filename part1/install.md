@@ -45,15 +45,17 @@ For Mac OS X, you will need to install the "Developer Tools" from the AppStore.
 You will also need ``git`` to continue with this quick-start. If ``git`` doesn't come installed on your system and it wansn't installed as part of your systems basic development tools package, you can <a href="http://git-scm.com/downloads">download it here</a>
 or install it using your favourite OS package manager.
 
-### Getting LFE
+### Getting and Compiling LFE
 
 The most recent version of LFE is always available here:
  * https://github.com/rvirding/lfe/
 
-With ``git`` and ``erl`` in your ``$PATH``, let's download LFE:
+With ``git`` and ``erl`` in your ``$PATH``, let's download LFE and the compile it:
 
 ```bash
 $ git clone https://github.com/rvirding/lfe.git
 $ cd lfe
 $ make
 ```
+
+LFE is just a set of Erlang libraries, so like an Erlang project, the source code needs to be compiled to ``.beam`` files. Running ``make`` in the ``lfe`` directory will do that. At which point, everything is ready to go!
