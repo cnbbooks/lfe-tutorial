@@ -33,7 +33,7 @@ covered lightly (or skipped entirely).
   * [Programming Erlang](https://pragprog.com/book/jaerlang2/programming-erlang)
   * [Erlang and OTP in Action](http://www.manning.com/logan/)
   * [Erlang Programming](http://shop.oreilly.com/product/9780596518189.do)
-* Exposure to a Lisp, whether by reading books or from a cource in school (it
+* Exposure to a Lisp, whether by reading books or from a course in school (it
   will be most helpful if you've had experience with Common Lisp, and LFE has
   more in common with Lisp-2s than with Lisp-1s like Schemes and Clojure).
 
