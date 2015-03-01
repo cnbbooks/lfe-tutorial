@@ -1,6 +1,6 @@
 {
-    "title": "LFE Quick Start",
-    "description": "An Introduction to LFE Going Ludicrous Speed",
+    "title": "The LFE Tutorial",
+    "description": "Getting Started with LFE",
     "plugins": ["ga"],
     "pluginsConfig": {
         "fontSettings": {
