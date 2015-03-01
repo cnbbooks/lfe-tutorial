@@ -51,6 +51,42 @@ Hit ``<ENTER>`` to get your answer:
 > 
 ```
 
+### Defining Variables and Functions
+
+The LFE REPL allows you do set variables and define functions. Let's define a variable called ``multiplier``:
+
+```lisp
+> (set multiplier 2)
+2
+>
+```
+
+When we set the value for that variable, the REPL provided feedback on the expression entered, showing us the value. Now we can use it just like the number for which it stands:
+
+```lisp
+> (* multiplier (+ 1 2 3 4 5 6))
+42
+>
+```
+
+The ``set`` form lets you define a variable; the ``defun`` form lets you define a function. Enter this in the REPL:
+
+```lisp
+> (defun double (x)
+    (* 2 x))
+```
+
+Now try it:
+
+```lisp
+> (double 21)
+42
+>
+```
+
+As we can see, this function multiplies any given number by ``2``.
+
+
 ### Leaving the REPL
 
 To exit the REPL and shutdown the underlying Erlang system which started when you executed ``./bin/lfe``, simply exit:
