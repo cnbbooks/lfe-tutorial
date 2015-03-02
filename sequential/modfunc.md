@@ -2,7 +2,7 @@
 
 ### Creating a Simple Module
 
-A programming language isn't much use if you can only run code from a REPL. So next we will write a small LFE program in a file on the file system. In the same directory that you started the LFE REPL, reate a new file called ``tut.lfe`` (the filename is **important**: be sure you type it just as we have) using your favorite text editor.
+A programming language isn't much use if you can only run code from a REPL. So next we will write a small LFE program in a file on the file system. In the same directory that you started the LFE REPL, create a new file called ``tut.lfe`` (the filename is **important**: be sure you type it just as we have) using your favorite text editor.
 
 Here's the code to enter:
 
@@ -66,3 +66,71 @@ That says "in the module ``tut``, please make available the function called ``do
 
 ### A More Complicated Example
 
+Now for a more complicated example, the factorial of a number (e.g. factorial of 4 is 4 * 3 * 2 * 1). Enter the following code in a file called ``tut1.lfe``.
+
+```lisp
+(defmodule tut1
+  (export (fac 1)))
+
+(defun fac
+  ((1) 1)
+  ((n) (* n (fac (- n 1)))))
+```
+
+Compile the file
+
+```lisp
+> (c "tut1.lfe")
+#(module tut1)
+```
+
+And now calculate the factorial of 4.
+
+```lisp
+> (tut1:fac 4)
+24
+```
+
+The function ``fac`` contains two parts. The first part:
+
+```lisp
+  ((1) 1)
+```
+
+says that the factorial of 1 is 1. Note that this part is a separate list in the function definition where the first element is a *list* of the arguments to the function and the rest is the body of the function. The second part:
+
+```lisp
+  ((n) (* n (fac (- n 1)))))
+```
+
+says that the factorial of n is n multiplied by the factorial of n - 1. After this part which is the last part we end the function definition with the closing ``)``.
+
+A function can have many arguments. Let's expand the module ``tut1`` with the rather stupid function to multiply two numbers:
+
+```lisp
+(defmodule tut1
+  (export (fac 1) (mult 2)))
+
+(defun fac
+  ((1) 1)
+  ((n) (* n (fac (- n 1)))))
+
+(defun mult (x y)
+  (* x y))
+
+```
+
+Note that we have also had to expand the ``(export`` line with the information that there is another function ``mult`` with two arguments. Compile the file:
+
+```lisp
+> (c "tut1.lfe")
+#(module tut1)
+```
+and try it out:
+
+```lisp
+> (tut1:mult 3 4)
+12
+```
+
+In the example above the numbers are integers and the arguments in the functions in the code, ``n``, ``x``, ``y`` are called variables. Examples of variables could be ``number``, ``shoe-size``, ``age`` etc.
