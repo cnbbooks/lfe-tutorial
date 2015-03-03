@@ -1,10 +1,12 @@
 {
     "title": "The LFE Tutorial",
     "description": "Getting Started with LFE",
-    "plugins": ["ga"],
+    "plugins": [
+        "ga"
+    ],
     "pluginsConfig": {
         "fontSettings": {
-            "theme": "night",
+            "theme": "white",
             "family": "serif",
             "size": 1
         },
@@ -22,6 +24,6 @@
         "paperSize": "a4"
     },
     "structure": {
-	"readme": "introduction.md"
+        "readme": "introduction.md"
     }
 }
