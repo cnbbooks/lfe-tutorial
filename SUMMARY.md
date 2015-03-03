@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Title Page](front/title.md)
+* [Title Page](front/title-page.md)
 * [Copyright Page](front/copyright-page.md)
 * [Installing LFE](sequential/install.md)
 * [Sequential Programming](sequential/README.md)
