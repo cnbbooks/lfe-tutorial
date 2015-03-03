@@ -87,8 +87,6 @@ We will jump straight into the deep end with an example using some interesting f
     ((r g b a) (when (all-channels? r g b a))
      (map 'red r 'green g 'blue b 'alpha a)))
 new
-blend(Src,Dst) ->
-    blend(Src,Dst,alpha(Src,Dst)).
 > (defun blend (src dst)
     (blend src dst (alpha src dst)))
 blend
@@ -103,7 +101,8 @@ blend
      (map-update 'red 0 'green 0 'blue 0 'alpha 0)))
 blend
 > (defun alpha
-    (((map 'alpha src-alpha) (map 'alpha dst-alpha))
+    (((map 'alpha src-alpha)
+      (map 'alpha dst-alpha))
      (+ src-alpha (* dst-alpha (- 1.0 src-alpha)))))
 alpha
 > (defun red
@@ -128,3 +127,23 @@ green
            (* dst-val dst-alpha (- 1.0 src-alpha))))))
 blue
 ```
+
+Now let's try it out:
+
+```lisp
+> (set color-1 (new 0.3 0.4 0.5 1.0))
+#M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
+> (set color-2 (new 1.0 0.8 0.1 0.3))
+#M(alpha 0.3 blue 0.1 green 0.8 red 1.0)
+> (blend color-1 color-2)
+#M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
+> (blend color-2 color-1)
+#M(alpha 1.0 blue 0.06499999999999999 green 0.46399999999999997
+   red 0.51)
+```
+
+This example warrants some explanation.
+
+First we define a couple macros to help with our guard tests. This is only here for convenience and to reduce syntax cluttering. Guards can be only composed of a limited set of functions, so we needed to use macros that would compile down to just the funtions allowed in guards. A full treatment of Lisp macros is beyond the scope of this tutorial, but there is a lot of good material available online for learning macros, including Paul Graham's book "On Lisp."
+
+[more content coming ...]
