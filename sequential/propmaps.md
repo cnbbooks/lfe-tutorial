@@ -108,23 +108,20 @@ alpha
 > (defun red
     (((map 'red src-val 'alpha src-alpha)
       (map 'red dst-val 'alpha dst-alpha))
-     (* src-val
-        (+ src-alpha
-           (* dst-val dst-alpha (- 1.0 src-alpha))))))
+     (+ (* src-val src-alpha)
+        (* dst-val dst-alpha (- 1.0 src-alpha)))))
 red
 > (defun green
     (((map 'green src-val 'alpha src-alpha)
       (map 'green dst-val 'alpha dst-alpha))
-     (* src-val
-        (+ src-alpha
-           (* dst-val dst-alpha (- 1.0 src-alpha))))))
+     (+ (* src-val src-alpha)
+        (* dst-val dst-alpha (- 1.0 src-alpha)))))
 green
 > (defun blue
     (((map 'blue src-val 'alpha src-alpha)
       (map 'blue dst-val 'alpha dst-alpha))
-     (* src-val
-        (+ src-alpha
-           (* dst-val dst-alpha (- 1.0 src-alpha))))))
+     (+ (* src-val src-alpha)
+        (* dst-val dst-alpha (- 1.0 src-alpha)))))
 blue
 ```
 
@@ -138,8 +135,7 @@ Now let's try it out:
 > (blend color-1 color-2)
 #M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
 > (blend color-2 color-1)
-#M(alpha 1.0 blue 0.06499999999999999 green 0.46399999999999997
-   red 0.51)
+#M(alpha 1.0 blue 0.38 green 0.52 red 0.51)
 ```
 
 This example warrants some explanation.
