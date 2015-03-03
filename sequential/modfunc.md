@@ -134,3 +134,10 @@ and try it out:
 ```
 
 In the example above the numbers are integers and the arguments in the functions in the code, ``n``, ``x``, ``y`` are called variables. Examples of variables could be ``number``, ``shoe-size``, ``age`` etc.
+
+Note that when a function has only one part and all the arguments are variables then we can use the shorter form we saw in ``double`` and ``mult``. This means that we could also have written ``mult`` as:
+
+```lisp
+(defun mult
+  ((x y) (* x y)))
+```
