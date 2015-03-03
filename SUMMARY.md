@@ -6,6 +6,7 @@
    * [The REPL](sequential/repl.md)
    * [Modules and Functions](sequential/modfunc.md)
    * [Atoms](sequential/atoms.md)
+   * [Tuples](sequential/tuples.md)
    * [Lists](sequential/lists.md)
    * [Property Lists and Maps](sequential/propmaps.md)
    * [The Erlang Standard Library](sequential/stdlib.md)
