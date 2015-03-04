@@ -72,69 +72,68 @@ As with property lists, maps are a set of key to value associations. You may cre
 We will jump straight into the deep end with an example using some interesting features. The following example shows how we calculate alpha blending using maps to reference color and alpha channels:
 
 ```lisp
-> (defmacro channel? (val)
-    `(andalso (is_float ,val)
-              (>= ,val 0.0)
-              (=< ,val 1.0)))
-()
-> (defmacro all-channels? (r g b a)
-    `(andalso (channel? ,r)
-              (channel? ,g)
-              (channel? ,b)
-              (channel? ,a)))
-()
-> (defun new
-    ((r g b a) (when (all-channels? r g b a))
-     (map 'red r 'green g 'blue b 'alpha a)))
-new
-> (defun blend (src dst)
-    (blend src dst (alpha src dst)))
-blend
-> (defun blend
-    ((src dst alpha) (when (> alpha 0.0))
-     (map-update dst
-                 'red (/ (red src dst) alpha)
-                 'green (/ (green src dst) alpha)
-                 'blue (/ (blue src dst) alpha)
-                 'alpha alpha))
-    ((_ dst _)
-     (map-update 'red 0 'green 0 'blue 0 'alpha 0)))
-blend
-> (defun alpha
-    (((map 'alpha src-alpha)
-      (map 'alpha dst-alpha))
-     (+ src-alpha (* dst-alpha (- 1.0 src-alpha)))))
-alpha
-> (defun red
-    (((map 'red src-val 'alpha src-alpha)
-      (map 'red dst-val 'alpha dst-alpha))
-     (+ (* src-val src-alpha)
-        (* dst-val dst-alpha (- 1.0 src-alpha)))))
-red
-> (defun green
-    (((map 'green src-val 'alpha src-alpha)
-      (map 'green dst-val 'alpha dst-alpha))
-     (+ (* src-val src-alpha)
-        (* dst-val dst-alpha (- 1.0 src-alpha)))))
-green
-> (defun blue
-    (((map 'blue src-val 'alpha src-alpha)
-      (map 'blue dst-val 'alpha dst-alpha))
-     (+ (* src-val src-alpha)
-        (* dst-val dst-alpha (- 1.0 src-alpha)))))
-blue
+(defmodule color
+  (export (new 4) (blend 2)))
+
+(defmacro channel? (val)
+  `(andalso (is_float ,val) (>= ,val 0.0) (=< ,val 1.0)))
+
+(defmacro all-channels? (r g b a)
+  `(andalso (channel? ,r)
+            (channel? ,g)
+            (channel? ,b)
+            (channel? ,a)))
+
+(defun new
+  ((r g b a) (when (all-channels? r g b a))
+   (map 'red r 'green g 'blue b 'alpha a)))
+
+(defun blend (src dst)
+  (blend src dst (alpha src dst)))
+
+(defun blend
+  ((src dst alpha) (when (> alpha 0.0))
+   (map-update dst
+               'red (/ (red src dst) alpha)
+               'green (/ (green src dst) alpha)
+               'blue (/ (blue src dst) alpha)
+               'alpha alpha))
+  ((_ dst _)
+   (map-update dst 'red 0 'green 0 'blue 0 'alpha 0)))
+
+(defun alpha
+  (((map 'alpha src-alpha) (map 'alpha dst-alpha))
+   (+ src-alpha (* dst-alpha (- 1.0 src-alpha)))))
+
+(defun red
+  (((map 'red src-val 'alpha src-alpha)
+    (map 'red dst-val 'alpha dst-alpha))
+   (+ (* src-val src-alpha)
+      (* dst-val dst-alpha (- 1.0 src-alpha)))))
+
+(defun green
+  (((map 'green src-val 'alpha src-alpha)
+    (map 'green dst-val 'alpha dst-alpha))
+   (+ (* src-val src-alpha)
+      (* dst-val dst-alpha (- 1.0 src-alpha)))))
+
+(defun blue
+  (((map 'blue src-val 'alpha src-alpha)
+    (map 'blue dst-val 'alpha dst-alpha))
+   (+ (* src-val src-alpha)
+      (* dst-val dst-alpha (- 1.0 src-alpha)))))
 ```
 
 Now let's try it out:
 
 ```lisp
-> (set color-1 (new 0.3 0.4 0.5 1.0))
+> (set color-1 (color:new 0.3 0.4 0.5 1.0))
 #M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
-> (set color-2 (new 1.0 0.8 0.1 0.3))
+> (set color-2 (color:new 1.0 0.8 0.1 0.3))
 #M(alpha 0.3 blue 0.1 green 0.8 red 1.0)
-> (blend color-1 color-2)
+> (color:blend color-1 color-2)
 #M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
-> (blend color-2 color-1)
+> (color:blend color-2 color-1)
 #M(alpha 1.0 blue 0.38 green 0.52 red 0.51)
 ```
 
@@ -142,4 +141,48 @@ This example warrants some explanation.
 
 First we define a couple macros to help with our guard tests. This is only here for convenience and to reduce syntax cluttering. Guards can be only composed of a limited set of functions, so we needed to use macros that would compile down to just the funtions allowed in guards. A full treatment of Lisp macros is beyond the scope of this tutorial, but there is a lot of good material available online for learning macros, including Paul Graham's book "On Lisp."
 
-[more content coming ...]
+```lisp
+(defun new
+  ((r g b a) (when (all-channels? r g b a))
+   (map 'red r 'green g 'blue b 'alpha a)))
+```
+
+The function ``new/4`` creates a new map term with and lets the keys ``red``, ``green``, ``blue`` and ``alpha`` be associated with an initial value. In this case we only allow for float values between and including 0.0 and 1.0 as ensured by the ``all-channels?`` and ``channel?`` macros.
+
+By calling ``blend/2`` on any color term created by ``new/4`` we can calculate the resulting color as determined by the two maps terms.
+
+The first thing ``blend/2`` does is to calculate the resulting alpha channel.
+
+```lisp
+(defun alpha
+  (((map 'alpha src-alpha) (map 'alpha dst-alpha))
+   (+ src-alpha (* dst-alpha (- 1.0 src-alpha)))))
+```
+
+We fetch the value associated with key ``alpha`` for both arguments using the ``(map 'alpha <var>)`` pattern. Any other keys in the map are ignored, only the key ``alpha`` is required and checked for.
+
+This is also the case for functions ``red/2``, ``blue/2`` and ``green/2``.
+
+```lisp
+(defun red
+  (((map 'red src-val 'alpha src-alpha)
+    (map 'red dst-val 'alpha dst-alpha))
+   (+ (* src-val src-alpha)
+      (* dst-val dst-alpha (- 1.0 src-alpha)))))
+```
+
+The difference here is that we check for two keys in each map argument. The other keys are ignored.
+
+Finally we return the resulting color in ``blend/3``.
+
+```lisp
+(defun blend
+  ((src dst alpha) (when (> alpha 0.0))
+   (map-update dst
+               'red (/ (red src dst) alpha)
+               'green (/ (green src dst) alpha)
+               'blue (/ (blue src dst) alpha)
+               'alpha alpha))
+```
+
+We update the ``dst`` map with new channel values. The syntax for updating an existing key with a new value is done with ``map-update`` form.
