@@ -91,9 +91,13 @@ The length of a list with the first element ``first`` and the remaining elements
 
 In general we can say we use tuples where we would use "records" or "structs" in other languages and we use lists when we want to represent things which have varying sizes, (i.e. where we would use linked lists in other languages).
 
-LFE does not have a string data type, instead strings can be represented by lists of Unicode characters. So the list ``(97 98 99)`` is equivalent to "abc". The LFE repl is "clever" and guesses the what sort of list we mean and outputs it in what it thinks is the most appropriate form, for example:
+LFE does not have a string data type, instead strings can be represented by lists of Unicode characters. So the list ``(97 98 99)`` is equivalent to "abc". Note that we don't have to quote strings as we do lists. The LFE repl is "clever" and guesses the what sort of list we mean and outputs it in what it thinks is the most appropriate form, for example:
 
 ```lisp
 > '(97 98 99)
+"abc"
+> "abc"
+"abc"
+> '"abc"
 "abc"
 ```
