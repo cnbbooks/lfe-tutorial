@@ -69,7 +69,7 @@ As with property lists, maps are a set of key to value associations. You may cre
 #M("key" 42)
 ```
 
-We will jump straight into the deep end with an example using some interesting features. The following example shows how we calculate alpha blending using maps to reference color and alpha channels:
+We will jump straight into the deep end with an example using some interesting features. The following example shows how we calculate alpha blending using maps to reference color and alpha channels. Save this code as the file ``color.lfe`` in the directory from which you have run the LFE REPL:
 
 ```lisp
 (defmodule color
@@ -124,9 +124,11 @@ We will jump straight into the deep end with an example using some interesting f
       (* dst-val dst-alpha (- 1.0 src-alpha)))))
 ```
 
-Now let's try it out:
+Now let's try it out, first compiling it:
 
 ```lisp
+> (c "color.lfe")
+#(module color)
 > (set color-1 (color:new 0.3 0.4 0.5 1.0))
 #M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
 > (set color-2 (color:new 1.0 0.8 0.1 0.3))
