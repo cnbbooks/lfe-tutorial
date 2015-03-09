@@ -3,21 +3,19 @@
 The LFE Tutorial is based on the Erlang tutorial [Getting Started with
 Erlang](http://www.erlang.org/doc/getting_started/intro.html)
 
+
+## Introduction
+
 The members of the LFE community are
 [working torward](https://github.com/lfe/docs/issues/40)
 a more comprehensive LFE tutorial, but we wanted to
 [get something out](https://github.com/lfe/docs/issues/42)
 sooner rather than later, so we're starting with this. On the positive side,
 it's material that has already been created and we have only had to make syntax
-changes and other edits at our discretion. On less positive side, since this
-tutorial is not comprehensive (i.e., it doesn't start from absolute basics)
-some knowledge is presumed.
+changes and other edits at our discretion. However, one downside of this as the first full LFE tutorial is that it's not 100% new-comer friendly:
+it doesn't start from absolute basics (some knowledge is presumed) and the tutorial is not comprehensive (much is left out).
 
-
-## Introduction
-
-This is a "kick start" tutorial to get you started with LFE. Everything here
-is true, but only part of the truth. For example, we will typically only cover
+That being said, the this tutorial is an intentional "kick start", aimed at to getting you started with LFE. Everything here is true, but as mentioned, it only represents part of the truth. For example, we will typically only cover
 simpler syntax and not explore all the esoteric forms. However, for the curious
 reader we've annotated where one may get more detailed information on topics
 covered lightly (or skipped entirely).
