@@ -2,7 +2,7 @@
 
 ## Property Lists
 
-Property lists in Erlang and LFE are a simple way to create key-value pairs. They have a very simple structure: a list of tuples, where the key is the first element of each tuple and is an atom. Very often you will see "options" for functions provided as property lists (this is similar to how other programming languages use keywords in function arguments).
+Property lists in Erlang and LFE are a simple way to create key-value pairs (we actually saw them in the last section, but didn't mention it). They have a very simple structure: a list of tuples, where the key is the first element of each tuple and is an atom. Very often you will see "options" for functions provided as property lists (this is similar to how other programming languages use keywords in function arguments).
 
 Property lists can be created with just the basic data structures of LFE:
 
