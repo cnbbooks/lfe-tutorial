@@ -3,8 +3,9 @@
 Whereas tuples group things together, we also want to be able to represent lists of things. Lists in LFE are surrounded by "(" and ")". For example a list of the temperatures of various cities in the world could be:
 
 ```lisp
-(#(moscow #(c -10)) (cape_town #(f 70)) (stockholm #(c -4))
- #(paris #(f 28)) #(london #(f 36)))
+(#(Moscow #(C -10))
+ #(Cape-Town #(F 70)) #(Stockholm #(C -4))
+ #(Paris #(F 28)) #(London #(F 36)))
 ```
 
 Note that this list was so long that it didn't fit on one line. This doesn't matter, LFE allows line breaks at all "sensible places" but not, for example, in the middle of atoms, integers etc.
