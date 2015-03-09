@@ -1,3 +1,3 @@
-# The Erlang Standard Library
+## The Erlang Standard Library
 
 [forthcoming]
