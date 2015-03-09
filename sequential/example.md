@@ -8,7 +8,7 @@ Now for a larger example to consolidate what we have learnt so far. Assume we ha
 
 ;; Only this function is exported
 (defun format-temps
-  (('())
+  ((())
     ;; No output for an empty list
     'ok)
   (((cons city rest))
@@ -16,16 +16,16 @@ Now for a larger example to consolidate what we have learnt so far. Assume we ha
     (format-temps rest)))
 
 (defun f->c
-  ((`#(,name #(C ,temp)))
+  (((tuple name (tuple 'C temp))
     ;; No conversion needed
-    `#(,name #(C ,temp)))
-  ((`#(,name #(F ,temp)))
+    (tuple name (tuple 'C temp))))
+  (((tuple name (tuple 'F temp)))
     ;; Do the conversion
-    `#(,name #(C ,(/ (* (- temp 32) 5) 9)))))
+    (tuple name (tuple 'C (/ (* (- temp 32) 5) 9)))))
 
 (defun print-temp
-  ((`#(,name #(C ,temp)))
-    (io:format "~-15w ~w C~n" `(,name ,temp))))
+  (((tuple name (tuple 'C temp)))
+    (lfe_io:format "~-15w ~w C~n" (list name temp))))
 ```
 
 ```lisp
@@ -37,15 +37,12 @@ Now for a larger example to consolidate what we have learnt so far. Assume we ha
       #(Stockholm #(C -4))
       #(Paris #(F 28))
       #(London #(F 36)))))
-'Moscow'        10 C
-'Cape-Town'     21.11111111111111 C
-'Stockholm'     -4 C
-'Paris'         -2.2222222222222223 C
-'London'        2.2222222222222223 C
+Moscow          10 C
+Cape-Town       21.11111111111111 C
+Stockholm       -4 C
+Paris           -2.2222222222222223 C
+London          2.2222222222222223 C
 ok
 ```
 
 Before we look at how this program works, notice that we have added a few comments to the code. A comment starts with a ``;`` character and goes on to the end of the line (in LFE, the convention is that a comment starting with a single ``;`` is reserved for comments at the end of a line of code; lines which start with a comment use two ``;;``, as above). Note as well that the ``(export (format-temps 1))`` line only includes the function ``format-temps/1``, the other functions are local functions, i.e. they are not visible from outside the module ``temp-convert``.
-
-
-
