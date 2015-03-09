@@ -1,6 +1,6 @@
-# Property Lists and Maps
+## Property Lists and Maps
 
-## Property Lists
+### Property Lists
 
 Property lists in Erlang and LFE are a simple way to create key-value pairs (we actually saw them in the last section, but didn't mention it). They have a very simple structure: a list of tuples, where the key is the first element of each tuple and is an atom. Very often you will see "options" for functions provided as property lists (this is similar to how other programming languages use keywords in function arguments).
 
@@ -58,7 +58,7 @@ Returning as ratio ...
 "1/2"
 ```
 
-## Maps
+### Maps
 
 As with property lists, maps are a set of key to value associations. You may create an association from "key" to value 42 in one of two ways: using the LFE core form ``map`` or entering a map literal:
 
