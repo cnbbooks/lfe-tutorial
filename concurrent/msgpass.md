@@ -9,7 +9,7 @@ In the following example we create two processes which send messages to each oth
 (defun ping
   ((0 pong-pid)
    (! pong-pid 'finished)
-   (lfe_io:format "ping finished~n" ()))
+   (lfe_io:format "Ping finished~n" ()))
   ((n pong-pid)
    (! pong-pid (tuple 'ping (self)))
    (receive
@@ -41,7 +41,7 @@ Pong received ping
 Ping received pong
 Pong received ping
 Ping received pong
-ping finished
+Ping finished
 Pong finished
 ```
 
@@ -100,9 +100,62 @@ Of course the LFE implementation is "clever" and minimizes the number of times e
 
 Now back to the ping pong example.
 
-"Pong" is waiting for messages. If the atom ``finished`` is received, "pong" writes "Pong finished" to the output and as it has nothing more to do, terminates. If it receives a message with the format:
+"Pong" is waiting for messages. If the atom ``finished`` is received, "pong" writes "Pong finished" to the output and as it has nothing more to do, terminates. If, however, it receives a message with the format:
 
 ```lisp
 #(ping ping-pid)
 ```
 
+it writes "Pong received ping" to the output and sends the atom ``pong`` to the process "ping":
+
+```lisp
+(! ping-pid 'pong)
+```
+
+Note how "!" is used to send messages. The syntax of "!" is:
+
+```lisp
+(! pid message)
+```
+
+I.e. ``message`` (any LFE term) is sent to the process with indentity ``pid``.
+
+After sending the message ``pong``, to the process "ping", "pong" calls the ``pong`` function again, which causes it to get back to the ``receive`` again and wait for another message. Now let's look at the process "ping". Recall that it was started by executing:
+
+```lisp
+(tut15:ping 3 pong-pid)
+```
+
+Looking at the function ``ping/2`` we see that the second clause of ``ping/2`` is executed since the value of the first argument is 3 (not 0) (first clause head is ``(0 pong-pid)``, second clause head is ``(n pong-pid)``, so ``n`` becomes 3).
+
+The second clause sends a message to "pong":
+
+```lisp
+(! pong-pid (tuple 'ping (self)))
+```
+
+``(self)`` returns the pid of the process which executes ``(self)``, in this case the pid of "ping". (Recall the code for "pong", this will land up in the variable ``ping-pid`` in the ``receive`` previously explained).
+
+"Ping" now waits for a reply from "pong":
+
+```lisp
+(receive
+  ('pong (lfe_io:format "Ping received pong~n" ())))
+```
+
+and writes "Ping received pong" when this reply arrives, after which "ping" calls the ``ping`` function again.
+
+```lisp
+(ping (- n 1) pong-pid)
+```
+
+``(- n 1)`` causes the first argument to be decremented until it becomes 0. When this occurs, the first clause of ``ping/2`` will be executed:
+
+```lisp
+(defun ping
+  ((0 pong-pid)
+   (! pong-pid 'finished)
+   (lfe_io:format "Ping finished~n" ()))
+```
+
+The atom ``finished`` is sent to "pong" (causing it to terminate as described above) and "Ping finished" is written to the output. "Ping" then itself terminates as it has nothing left to do.
