@@ -1,4 +1,4 @@
-# Lists
+## Lists
 
 Whereas tuples group things together, we also want to be able to represent lists of things. Lists in LFE are surrounded by "(" and ")". For example a list of the temperatures of various cities in the world could be:
 
