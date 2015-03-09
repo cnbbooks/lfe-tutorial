@@ -20,7 +20,7 @@ A very useful way of looking at parts of lists is by using the constructor ``con
 (2 3 4 5)
 ```
 
-We see here that ``set`` also allows you to define variables using patterns. Using ``cons`` we could separate the first element of the list from the rest of list (``first`` got the value 1 and ``rest`` the value (2 3 4 5)). We also see here that when we want to give a literal list we need to quote it with ``'``. This stops LFE trying to evaluate the list as a function call in the same way as quoting an atom stops LFE trying to evaluate the atom as a variable.
+We see here that ``set`` also allows you to define variables using patterns. Using ``cons`` we could separate the first element of the list from the rest of list (``first`` got the value 1 and ``rest`` the value (2 3 4 5)). We also see here that when we want to give a literal list we need to *quote* it with ``'``. This stops LFE trying to evaluate the list as a function call in the same way as quoting an atom stops LFE trying to evaluate the atom as a variable.
 
 Another example:
 
@@ -100,4 +100,24 @@ LFE does not have a string data type, instead strings can be represented by list
 "abc"
 > '"abc"
 "abc"
+```
+
+Lists can also be surrounded by "[" and "]" instead of parentheses. They are equivalent but must match, for example:
+
+```lisp
+> '(a b c)
+(a b c)
+> '[a b c]
+(a b c)
+> '(a b c]
+1: illegal ']'
+```
+
+This can be used to make list structures easier to read. For example, it is often used in function definitions for the list of arguments when there are multiple clauses:
+
+```lisp
+(defun list-length
+  ([()] 0)
+  ([(cons first rest)]
+   (+ 1 (list-length rest))))
 ```

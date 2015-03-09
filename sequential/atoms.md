@@ -24,7 +24,7 @@ Compile and test:
 17.78
 ```
 
-Notice that as atoms and variables look the same we have to tell LFE when we want it to be an atom. We do this by **quoting** the atom with a ``'``, for example ``'inch`` and ``'centimeter``. We have to do this both when we use it as argument in a function definition and when we use it when calling a function, otherwise LFE will assume that it is a variable.
+Notice that atoms and variables look the same so we have to tell LFE when we want it to be an atom. We do this by *quoting* the atom with a ``'``, for example ``'inch`` and ``'centimeter``. We have to do this both when we use it as argument in a function definition and when we use it when calling a function, otherwise LFE will assume that it is a variable.
 
 Also notice that we have introduced decimals (floating point numbers) without any explanation, but I guess you can cope with that.
 
