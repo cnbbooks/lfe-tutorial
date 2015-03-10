@@ -3,7 +3,7 @@
 Now for a larger example to consolidate what we have learnt so far. Assume we have a list of temperature readings from a number of cities in the world. Some of them are in Celsius (Centigrade) and some in Fahrenheit (as in the previous list). First let's convert them all to Celsius, then let's print out the data neatly. Save the following code to ``temp-convert.lfe``:
 
 ```lisp
-(defmodule temp-convert
+(defmodule tut5
   (export (format-temps 1)))
 
 ;; Only this function is exported
@@ -29,8 +29,8 @@ Now for a larger example to consolidate what we have learnt so far. Assume we ha
 ```
 
 ```lisp
-> (c "temp-convert.lfe")
-#(module temp-convert)
+> (c "tut5.lfe")
+#(module tut5)
 > (temp-convert:format-temps
     '(#(Moscow #(C 10))
       #(Cape-Town #(F 70))
