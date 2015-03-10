@@ -1,7 +1,9 @@
 ## Matching, Guards and Scope of Variables
 
-In the previous section we wrote a little example program for converting temperatures.
+In the previous section we wrote a little example program for converting temperatures. In creating programs like that with special data structures (in our case, a list of cities and their temperatures), it's often useful to create utility functions which make working with our data more convenient.
 
-XXX
+In this case, it could be useful to find the maximum and minimum temperature in our data. We can add support for this by creating the necessary code little bit at a time. Let's start with creating functions for finding the maximum value of the elements of a property list:
 
-It could be useful to find the maximum and minimum temperature in lists like this. Before extending the program to do this, let's look at functions for finding the maximum value of the elements in a list:
+```lisp
+
+```
