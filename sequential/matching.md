@@ -30,4 +30,8 @@ Then, in the LFE REPL:
 7
 ```
 
-[more to come]
+First note that we have two functions here with the same name: ``list-max``. However, each of these takes a different number of arguments (parameters). Or, another way of saying it: they have different arity. In LFE, functions having the same name but differing in arity are actually *different functions*. Where we need to distinguish between these functions we write name/arity, where name is the name of the function and arity is the number of arguments, in this case ``list-max/1`` and ``list-max/2``.
+
+Our functions above represent an example of walking through a list and "carrying" a value as we do so, in this case ``result-so-fa``r. ``list-max/1`` simply assumes that the max value of the list is the head of the list and calls ``list-max/2`` with the rest of the list and the value of the head of the list, in the above this would be ``(list-max '(2 3 4 5 6 7 4 3 2 1) 1)``. If we tried to use ``list-max/1`` with an empty list or tried to use it with something which isn't a list at all, we would cause an error. Note that the LFE philosophy is not to handle errors of this type in the function they occur, but to do so elsewhere. More about this later.
+
+[more later]

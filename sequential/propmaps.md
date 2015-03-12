@@ -149,7 +149,7 @@ First we define a couple macros to help with our guard tests. This is only here 
    (map 'red r 'green g 'blue b 'alpha a)))
 ```
 
-The function ``new/4`` creates a new map term with and lets the keys ``red``, ``green``, ``blue`` and ``alpha`` be associated with an initial value. In this case we only allow for float values between and including 0.0 and 1.0 as ensured by the ``all-channels?`` and ``channel?`` macros.
+The function ``new/4`` [^1] creates a new map term with and lets the keys ``red``, ``green``, ``blue`` and ``alpha`` be associated with an initial value. In this case we only allow for float values between and including 0.0 and 1.0 as ensured by the ``all-channels?`` and ``channel?`` macros.
 
 By calling ``blend/2`` on any color term created by ``new/4`` we can calculate the resulting color as determined by the two maps terms.
 
@@ -188,3 +188,7 @@ Finally we return the resulting color in ``blend/3``.
 ```
 
 We update the ``dst`` map with new channel values. The syntax for updating an existing key with a new value is done with ``map-update`` form.
+
+----
+
+[^1]: Note the use of the slash and number after the function name. We will be discussing this more in a future section, though before we get there you will see this again. Until we get to the full explanation, just know that the number represents the arity of a given function and this helps us be explicit about which function we mean.
