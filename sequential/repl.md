@@ -93,8 +93,6 @@ To exit the REPL and shutdown the underlying Erlang system which started when yo
 
 ```lisp
 > (exit)
-```
-```lisp
 ok
 ```
 At which point you will be presented with your regular system terminal prompt.

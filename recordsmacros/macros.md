@@ -23,16 +23,18 @@ Like a regular quote, a backquote alone protects its arguments from evaluation. 
 ```
 
 Quoting works with both lists and tuples. The backquote actually expands to an expression which builds the structure the templates describes. For example, the following
+
 ```lisp
 `(a is ,a and b is ,b)
 ```
+
 expands to
 
 ```lisp
 (list 'a 'is a 'and b 'is b)
 ```
 
-This:
+and
 
 ```lisp
 `(a . ,a)
@@ -44,11 +46,14 @@ expands to
 (cons 'a a)
 ```
 
-and
+This:
+
 ```lisp
 `#(a ,a b ,b)
 ```
+
 expands to
+
 ```lisp
 (tuple 'a a 'b b)
 ```
