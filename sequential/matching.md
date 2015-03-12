@@ -30,4 +30,5 @@ Then, in the LFE REPL:
 7
 ```
 
-[more to come]
+First note that we have two functions here with the same name: ``list-max``. However, each of these takes a different number of arguments (parameters). Or, another way of saying it: they have different arity. In LFE, functions having the same name but differing in arity are actually *different functions*. Where we need to distinguish between these functions we write name/arity, where name is the name of the function and arity is the number of arguments, in this case ``list-max/1`` and ``list-max/2``.
+
