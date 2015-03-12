@@ -11,7 +11,7 @@ The backquote macro makes it possible to build lists and tuples from templates. 
 (a b c)
 ```
 
-Like a regular quote, a backquote alone protects its arguments from evaluation. The advantage of backquote is that it is possible to turn on evaluation inside it using ``,`` (comma) and ``,@`` (comma-at)[^1]. When something is prefixed with a comma it will be evaluated. For example:
+Like a regular quote, a backquote alone protects its arguments from evaluation. The advantage of backquote is that it is possible to turn on evaluation inside forms which are backquoted using ``,`` (comma or "unquote") and ``,@`` (comma-at or "unquote splice").[^1] When something is prefixed with a comma it will be evaluated. For example:
 
 ```lisp
 > (set (tuple a b) #(1 2))
@@ -22,7 +22,38 @@ Like a regular quote, a backquote alone protects its arguments from evaluation. 
 #(a 1 b 2)
 ```
 
-It works with both lists and tuples. The backquote actually expands to an expression which builds the structure the templates describes. For example `` `(a is ,a and b is ,b)`` expands to ``(list 'a 'is a 'and b 'is b)``, `` `(a . ,a)`` expands to ``(cons 'a a)`` and `` `#(a ,a b ,b)`` expands to ``(tuple 'a a 'b b)``. They are very useful in macros as we can write a macro definitions which look like the expansions they produce. For example we could define ``unless`` as:
+Quoting works with both lists and tuples. The backquote actually expands to an expression which builds the structure the templates describes. For example, the following
+```lisp
+`(a is ,a and b is ,b)
+```
+expands to
+
+```lisp
+(list 'a 'is a 'and b 'is b)
+```
+
+This:
+
+```lisp
+`(a . ,a)
+```
+
+expands to
+
+```lisp
+(cons 'a a)
+```
+
+and
+```lisp
+`#(a ,a b ,b)
+```
+expands to
+```lisp
+(tuple 'a a 'b b)
+```
+
+They are very useful in macros as we can write a macro definitions which look like the expansions they produce. For example we could define ``unless`` as:
 
 ```lisp
 (defmacro unless
@@ -45,4 +76,6 @@ Comma-at is like comma but splices its argument which should be a list. As the b
     (lfe_io:format "~-15w ~w C~n" `(,name ,temp))))
 ```
 
-[^1] In LFE the backquote is a normal macro and is expanded at the same time as other macros. When they are parsed `` `thing`` becomes ``(backquote thing)``, ``,thing`` becomes ``(unquote thing)`` and ``,@thing`` becomes ``(unquote-splicing thing)``.
+----
+
+[^1]: In LFE the backquote is a normal macro and is expanded at the same time as other macros. When they are parsed `` `thing`` becomes ``(backquote thing)``, ``,thing`` becomes ``(unquote thing)`` and ``,@thing`` becomes ``(unquote-splicing thing)``.
