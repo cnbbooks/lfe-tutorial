@@ -1,5 +1,6 @@
 ## More About Lists
 
+### The ``cons`` Form
 Remember how we used ``cons`` to "extract" head and tail values of a list when matching them? In the REPL, we would do it like so:
 
 ```lisp
@@ -47,8 +48,15 @@ Consider how ``reversed-list`` is built: it starts as ``'()``, we then successiv
 ```lisp
 
 ```
-
 [more to come]
+
+### Processing Lists
+
+[forthcoming]
+
+### Utility Functions Revisited
+
+[forthcoming]
 
 ----
 
