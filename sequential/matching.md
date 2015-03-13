@@ -1,6 +1,8 @@
 ## Matching, Guards and Scope of Variables
 
-In the previous section we wrote a little example program for converting temperatures. In creating programs like that with special data structures (in our case, a list of cities and their temperatures), it's often useful to create utility functions which make working with our data more convenient.
+In the previous section we wrote a little example program for converting temperatures. In creating programs like that with special data structures (in our case, a list of cities and their temperatures), it's often useful to create utility functions which make working with our data more convenient. We will explore that below and use these functions to introduce some new concepts.
+
+### A Utility Function
 
 In this case, it could be useful to find the maximum and minimum temperature in our data. We can add support for this by creating the necessary code little bit at a time. Let's start with creating functions for finding the maximum value of the elements of a property list:
 
@@ -30,9 +32,15 @@ Then, in the LFE REPL:
 7
 ```
 
-First note that we have two functions here with the same name: ``list-max``. However, each of these takes a different number of arguments (parameters). Or, another way of saying it: they have different arity. In LFE, functions having the same name but differing in arity are actually *different functions*. Where we need to distinguish between these functions we write name/arity, where name is the name of the function and arity is the number of arguments, in this case ``list-max/1`` and ``list-max/2``.
+### Pattern Matching
 
-Our functions above represent an example of walking through a list and "carrying" a value as we do so, in this case ``result-so-far`` is the variable that carries a value as we walk. ``list-max/1`` simply assumes that the max value of the list is the head of the list and calls ``list-max/2`` with the rest of the list and the value of the head of the list, in the above this would be ``(list-max '(2 3 4 5 6 7 4 3 2 1) 1)``. If we tried to use ``list-max/1`` with an empty list or tried to use it with something which isn't a list at all, we would cause an error. The LFE philosophy is not to handle errors of this type in the function they occur, but to do so elsewhere. More about this later.
+Before we talk about pattern matching, let's clarify why we have two different functions with the same name. Note that the two ``list-max`` functions above each take a different number of arguments (parameters). Or, another way of saying it: they have different *arity*. In LFE, functions having the same name but differing in arity are actually *different functions*. Where we need to distinguish between these functions we write ``<function name>/<arity>``, where ``<arity>`` is an integer representing the number of arguments that function takes. For our example above, we would write ``list-max/1`` and ``list-max/2``.
+
+The next things we should explain is the arguments for ``list-max/2``.
+
+[more to come]
+
+Now that we know how there can be two functions with the same name and how the arguments for ``list-max/2`` are working, let's step through the functions above. They represent an example of walking through a list and "carrying" a value as we do so, in this case ``result-so-far`` is the variable that carries a value as we walk. ``list-max/1`` simply assumes that the max value of the list is the head of the list and calls ``list-max/2`` with the rest of the list and the value of the head of the list, in the above this would be ``(list-max '(2 3 4 5 6 7 4 3 2 1) 1)``. If we tried to use ``list-max/1`` with an empty list or tried to use it with something which isn't a list at all, we would cause an error. The LFE philosophy is not to handle errors of this type in the function they occur, but to do so elsewhere. More about this later.
 
 ### Guards
 
