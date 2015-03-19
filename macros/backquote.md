@@ -1,8 +1,4 @@
-## Macros
-
-[forthcoming]
-
-### The Backquote Macro
+## The Backquote Macro
 
 The backquote macro makes it possible to build lists and tuples from templates. Used by itself a backquote is equivalent to a regular quote:
 
