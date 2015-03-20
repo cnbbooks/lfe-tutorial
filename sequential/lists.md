@@ -54,7 +54,7 @@ In all examples above we have been using new variables names, not reusing old on
 The following example shows how we find the length of a list:
 
 ```lisp
-(defmodule tut4
+(defmodule tut6
   (export (list-length 1)))
 
 (defun list-length
@@ -66,9 +66,9 @@ The following example shows how we find the length of a list:
 Compile (file ``tut4.lfe``) and test:
 
 ```lisp
-> (c "tut4")
-#(module tut4)
-> (tut4:list-length '(1 2 3 4 5 6 7))
+> (c "tut6.lfe")
+#(module tut6)
+> (tut6:list-length '(1 2 3 4 5 6 7))
 7
 ```
 
