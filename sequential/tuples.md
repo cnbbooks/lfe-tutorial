@@ -1,17 +1,17 @@
 ## Tuples
 
-Now the ``tut2`` program is hardly good programming style. Consider:
+Now the ``tut4`` program is hardly good programming style. Consider:
 
 ```lisp
-(tut2:convert 3 'inch)
+(tut4:convert 3 'inch)
 ```
 
-Does this mean that 3 is in inches? or that 3 is in centimeters and we want to convert it to inches? So LFE has a way to group things together to make things more understandable. We call these tuples. Tuples are contructed and matched using ``(tuple ...)`` and literal tuples written with ``#( ... )``.
+Does this mean that 3 is in inches? or that 3 is in centimeters and we want to convert it to inches? So LFE has a way to group things together to make things more understandable. We call these tuples. Tuples are constructed and matched using ``(tuple ...)``, with literal tuples being written with ``#( ... )``.
 
-So we can write ``#(inch 3)`` to denote 3 inches and ``#(centimeter 5)`` to denote 5 centimeters. Now let's write a new program which converts centimeters to inches and vice versa. (file ``tut3.lfe``).
+So we can write ``#(inch 3)`` to denote 3 inches and ``#(centimeter 5)`` to denote 5 centimeters. Now let's write a new program which converts centimeters to inches and vice versa (file ``tut5.lfe``).
 
 ```lisp
-(defmodule tut3
+(defmodule tut5
   (export (convert-length 1)))
 
 (defun convert-length
@@ -22,11 +22,11 @@ So we can write ``#(inch 3)`` to denote 3 inches and ``#(centimeter 5)`` to deno
 Compile and test:
 
 ```lisp
-(c "tut3.lfe")                 
-#(module tut3)
-> (tut3:convert-length #(inch 5))
+(c "tut5.lfe")                 
+#(module tut5)
+> (tut5:convert-length #(inch 5))
 #(centimeter 12.7)
-> (tut3:convert-length (tut3:convert-length #(inch 5)))
+> (tut5:convert-length (tut5:convert-length #(inch 5)))
 #(inch 5.0)
 ```
 
