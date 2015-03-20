@@ -14,8 +14,8 @@ Paris
 Well, that's not how ``cons`` started life[^1]; it's original use was in "cons"tructing lists, not taking them apart. Here is some classic usage:
 
 ```lisp
-> (cons 'Madric tail)
-(Madric London Rome)
+> (cons 'Madrid tail)
+(Madrid London Rome)
 ```
 
 Let's look at a more involved example where we use ``cons``es to reverse the order of a list:
@@ -58,17 +58,107 @@ Now lets get back to the cities and temperatures, but take a more structured app
 
 ```lisp
 (defmodule tut8
-  (export all))
+  (export (format-temps 1)))
 
-...
+(defun format-temps (cities)
+  (->c cities))
+
+(defun ->c
+  (((cons (tuple name (tuple 'F temp)) tail))
+   (let ((converted (tuple name (tuple 'C (/ (* (- temp 32) 5) 9)))))
+     (cons converted (->c tail))))
+  (((cons city tail))
+   (cons city (->c tail)))
+  (('())
+   '()))
 ```
  Now let's test this new function:
  
 ```lisp
-
+> (c "tut8.lfe")
+#(module tut8)
+> (tut8:format-temps
+    '(#(Moscow #(C 10))
+      #(Cape-Town #(F 70))
+      #(Stockholm #(C -4))
+      #(Paris #(F 28))
+      #(London #(F 36)))))
+(#(Moscow #(C 10))
+ #(Cape-Town #(C 21.11111111111111))
+ #(Stockholm #(C -4))
+ #(Paris #(C -2.2222222222222223))
+ #(London #(C 2.2222222222222223)))
 ```
 
-[more to come]
+Let's look at this, bit-by-bit. In the first function:
+
+```lisp
+(defun format-temps (cities)
+  (->c cities))
+```
+
+we see that ``format-temps/1`` calls ``->c/1``. ``->c/1`` takes off the head of the List ``cities`` and converts it to Celsius if needed. The ``cons`` function is used to add the (maybe) newly converted city to the converted rest of the list:
+
+```lisp
+(cons converted (->c tail))
+```
+or
+
+```lisp
+(cons city (->c tail))
+```
+
+We go on doing this until we get to the end of the list (i.e. the list is empty):
+
+```lisp
+  (('())
+   '())
+```
+
+Now that we have converted the list, we should add a function to print it:
+
+```lisp
+(defmodule tut9
+  (export (format-temps 1)))
+
+(defun format-temps (cities)
+  (print-temps (->c cities)))
+
+(defun ->c
+  (((cons (tuple name (tuple 'F temp)) tail))
+   (let ((converted (tuple name (tuple 'C (/ (* (- temp 32) 5) 9)))))
+     (cons converted (->c tail))))
+  (((cons city tail))
+   (cons city (->c tail)))
+  (('())
+   '()))
+
+(defun print-temps
+  (((cons (tuple name (tuple 'C temp)) tail))
+   (io:format "~-15w ~w c~n" (list name temp))
+   (print-temps tail))
+  (('())
+   'ok))
+```
+
+Let's take a look:
+
+```lisp
+> (c "tut9.lfe")
+#(module tut9)
+> (tut9:format-temps
+    '(#(Moscow #(C 10))
+      #(Cape-Town #(F 70))
+      #(Stockholm #(C -4))
+      #(Paris #(F 28))
+      #(London #(F 36)))))
+'Moscow'        10 c
+'Cape-Town'     21.11111111111111 c
+'Stockholm'     -4 c
+'Paris'         -2.2222222222222223 c
+'London'        2.2222222222222223 c
+ok
+```
 
 ### Processing Lists
 
@@ -76,7 +166,86 @@ Now lets get back to the cities and temperatures, but take a more structured app
 
 ### Utility Functions Revisited
 
-[forthcoming]
+Remember a few sections back when we created the utility function for finding the maximum value in a list? Let's put that into action now.
+
+We now have to add a function to find the cities with the maximum and minimum temperatures. The program below isn't the most efficient way of doing this as we walk through the list of cities four times. But it is better to first strive for clarity and correctness and to make programs efficient only if really needed.
+
+```lisp
+(defmodule tut10
+  (export (format-temps 1)))
+
+(defun format-temps (cities)
+  (let* ((converted (->c cities)))
+    (print-temps converted)
+    (print-max-min (find-max-min converted))))
+
+(defun ->c
+  (((cons (tuple name (tuple 'F temp)) tail))
+   (let ((converted (tuple name (tuple 'C (/ (* (- temp 32) 5) 9)))))
+     (cons converted (->c tail))))
+  (((cons city tail))
+   (cons city (->c tail)))
+  (('())
+   '()))
+
+(defun print-temps
+  (((cons (tuple name (tuple 'C temp)) tail))
+   (io:format "~-15w ~w c~n" (list name temp))
+   (print-temps tail))
+  (('())
+   'ok))
+
+(defun find-max-min
+  (((cons city tail))
+    (find-max-min tail city city)))
+
+(defun find-max-min
+  (((cons head tail) max-city min-city)
+   (find-max-min tail
+                 (compare-max head max-city)
+                 (compare-min head min-city)))
+  (('() max-city min-city)
+   (tuple max-city min-city)))
+
+(defun compare-max
+  (((= (tuple name1 (tuple 'C temp1)) city1)
+    (= (tuple name2 (tuple 'C temp2)) city2))
+   (if (> temp1 temp2)
+       city1
+       city2)))
+
+(defun compare-min
+  (((= (tuple name1 (tuple 'C temp1)) city1)
+    (= (tuple name2 (tuple 'C temp2)) city2))
+   (if (< temp1 temp2)
+       city1
+       city2)))
+
+(defun print-max-min
+  (((tuple (tuple max-name (tuple 'C max-temp))
+           (tuple min-name (tuple 'C min-temp))))
+   (io:format "Max temperature was ~w c in ~w~n" (list max-temp max-name))
+   (io:format "Min temperature was ~w c in ~w~n" (list min-temp min-name))))
+```
+
+```lisp
+> (c "tut10.lfe")
+#(module tut10)
+> (tut10:format-temps
+    '(#(Moscow #(C 10))
+      #(Cape-Town #(F 70))
+      #(Stockholm #(C -4))
+      #(Paris #(F 28))
+      #(London #(F 36)))))
+'Moscow'        10 c
+'Cape-Town'     21.11111111111111 c
+'Stockholm'     -4 c
+'Paris'         -2.2222222222222223 c
+'London'        2.2222222222222223 c
+Max temperature was 21.11111111111111 c in 'Cape-Town'
+Min temperature was -4 c in 'Stockholm'
+ok
+```
 
 ----
 
