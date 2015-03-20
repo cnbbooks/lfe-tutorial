@@ -2,10 +2,10 @@
 
 Atoms are another data type in LFE. They are words, for example ``charles``, ``centimeter``, ``inch`` and ``ok``. Atoms are similar to symbols in Lisp except that are simply names, nothing else. They are not like variables which can have a value.
 
-Enter the next program (file: ``tut2.lfe``) which could be useful for converting from inches to centimeters and vice versa:
+Enter the next program (file: ``tut4.lfe``) which could be useful for converting from inches to centimeters and vice versa:
 
 ```lisp
-(defmodule tut2
+(defmodule tut4
   (export (convert 2)))
 
 (defun convert
@@ -16,11 +16,11 @@ Enter the next program (file: ``tut2.lfe``) which could be useful for converting
 Compile and test:
 
 ```lisp
-> (c "tut2.lfe")
-#(module tut2)
-> (tut2:convert 3 'inch)
+> (c "tut4.lfe")
+#(module tut4)
+> (tut4:convert 3 'inch)
 1.1811023622047243
-> (tut2:convert 7 'centimeter)
+> (tut4:convert 7 'centimeter)
 17.78
 ```
 
@@ -31,15 +31,15 @@ Also notice that we have introduced decimals (floating point numbers) without an
 See what happens if I enter something other than centimeter or inch in the convert function:
 
 ```lisp
-> (tut2:convert 3 'miles)
+> (tut4:convert 3 'miles)
 exception error: function_clause
-  in (: tut2 convert 3 miles)
+  in (: tut4 convert 3 miles)
 ```
 
 The two parts of the convert function are called its *clauses*. Here we see that ``miles`` is not part of either of the clauses. The LFE system can't **match** either of the clauses so we get an error message ``function_clause``. The shell formats the error message nicely, but to see the actual error tuple we can do:
 
 ```lisp
-> (catch (tut2:convert 3 'miles))
+> (catch (tut4:convert 3 'miles))
 #(EXIT
   #(function_clause
     (#(tut2 convert (3 miles) (#(file "./tut2.lfe") #(line 4)))

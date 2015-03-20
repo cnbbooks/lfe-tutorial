@@ -7,7 +7,7 @@ In the previous section we wrote a little example program for converting tempera
 In this case, it could be useful to find the maximum and minimum temperature in our data. We can add support for this by creating the necessary code little bit at a time. Let's start with creating functions for finding the maximum value of the elements of a property list:
 
 ```lisp
-(defmodule tut6
+(defmodule tut9
   (export (list-max 1)))
 
 (defun list-max
@@ -26,9 +26,9 @@ In this case, it could be useful to find the maximum and minimum temperature in 
 Then, in the LFE REPL:
 
 ```lisp
-> (c "tut6.lfe")
-#(module tut6)
-> (tut6:list-max '(1 2 3 4 5 6 7 4 3 2 1))
+> (c "tut9.lfe")
+#(module tut9)
+> (tut9:list-max '(1 2 3 4 5 6 7 4 3 2 1))
 7
 ```
 
