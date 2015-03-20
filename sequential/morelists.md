@@ -54,6 +54,8 @@ Consider how ``reversed-list`` is built: it starts as ``'()``, we then successiv
 
 The Erlang module ``lists`` contains a lot of functions for manipulating lists, for example for reversing them -- our work above was done for demonstration and pedagogical purposes. For serious applications, one should prefer functions in the Erlang standard library.[^2]
 
+### Processing Lists
+
 Now lets get back to the cities and temperatures, but take a more structured approach this time. First let's convert the whole list to Celsius as follows:
 
 ```lisp
@@ -160,15 +162,9 @@ Let's take a look:
 ok
 ```
 
-### Processing Lists
-
-[forthcoming]
-
 ### Utility Functions Revisited
 
-Remember a few sections back when we created the utility function for finding the maximum value in a list? Let's put that into action now.
-
-We now have to add a function to find the cities with the maximum and minimum temperatures. The program below isn't the most efficient way of doing this as we walk through the list of cities four times. But it is better to first strive for clarity and correctness and to make programs efficient only if really needed.
+Remember a few sections back when we created the utility function for finding the maximum value in a list? Let's put that into action now: we want to add a function which finds the cities with the maximum and minimum temperatures. 
 
 ```lisp
 (defmodule tut10
@@ -228,6 +224,8 @@ We now have to add a function to find the cities with the maximum and minimum te
    (io:format "Min temperature was ~w c in ~w~n" (list min-temp min-name))))
 ```
 
+Let's try it out:
+
 ```lisp
 > (c "tut10.lfe")
 #(module tut10)
@@ -246,6 +244,8 @@ Max temperature was 21.11111111111111 c in 'Cape-Town'
 Min temperature was -4 c in 'Stockholm'
 ok
 ```
+
+As you may have noticed, that program isn't the most *efficient* way of doing this, since we walk through the list of cities four times. But it is better to first strive for clarity and correctness and to make programs efficient only if really needed.
 
 ----
 
