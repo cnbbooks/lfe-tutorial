@@ -21,7 +21,7 @@ Well, that's not how ``cons`` started life[^1]; it's original use was in "cons"t
 Let's look at a more involved example where we use ``cons``es to reverse the order of a list:
 
 ```lisp
-(defmodule tut7
+(defmodule tut10
   (export all))
   
 (defun reverse (list)
@@ -37,9 +37,9 @@ Let's look at a more involved example where we use ``cons``es to reverse the ord
 Then, in the REPL:
 
 ```lisp
-> (c "tut7.lfe")
-#(module tut7)
-> (tut7:reverse (list 1 2 3))
+> (c "tut10.lfe")
+#(module tut10)
+> (tut10:reverse (list 1 2 3))
 (3 2 1)
 ```
 
@@ -59,7 +59,7 @@ The Erlang module ``lists`` contains a lot of functions for manipulating lists, 
 Now lets get back to the cities and temperatures, but take a more structured approach this time. First let's convert the whole list to Celsius as follows:
 
 ```lisp
-(defmodule tut8
+(defmodule tut11
   (export (format-temps 1)))
 
 (defun format-temps (cities)
@@ -77,9 +77,9 @@ Now lets get back to the cities and temperatures, but take a more structured app
  Now let's test this new function:
  
 ```lisp
-> (c "tut8.lfe")
-#(module tut8)
-> (tut8:format-temps
+> (c "tut11.lfe")
+#(module tut11)
+> (tut11:format-temps
     '(#(Moscow #(C 10))
       #(Cape-Town #(F 70))
       #(Stockholm #(C -4))
@@ -120,7 +120,7 @@ We go on doing this until we get to the end of the list (i.e. the list is empty)
 Now that we have converted the list, we should add a function to print it:
 
 ```lisp
-(defmodule tut9
+(defmodule tut12
   (export (format-temps 1)))
 
 (defun format-temps (cities)
@@ -146,9 +146,9 @@ Now that we have converted the list, we should add a function to print it:
 Let's take a look:
 
 ```lisp
-> (c "tut9.lfe")
-#(module tut9)
-> (tut9:format-temps
+> (c "tut12.lfe")
+#(module tut12)
+> (tut12:format-temps
     '(#(Moscow #(C 10))
       #(Cape-Town #(F 70))
       #(Stockholm #(C -4))
@@ -167,7 +167,7 @@ ok
 Remember a few sections back when we created the utility function for finding the maximum value in a list? Let's put that into action now: we want to add a function which finds the cities with the maximum and minimum temperatures. 
 
 ```lisp
-(defmodule tut10
+(defmodule tut13
   (export (format-temps 1)))
 
 (defun format-temps (cities)
@@ -227,9 +227,9 @@ Remember a few sections back when we created the utility function for finding th
 Let's try it out:
 
 ```lisp
-> (c "tut10.lfe")
-#(module tut10)
-> (tut10:format-temps
+> (c "tut13.lfe")
+#(module tut13)
+> (tut13:format-temps
     '(#(Moscow #(C 10))
       #(Cape-Town #(F 70))
       #(Stockholm #(C -4))
