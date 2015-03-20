@@ -124,7 +124,7 @@ Note that we have also had to expand the ``(export`` line with the information t
 
 ```lisp
 > (c "tut3.lfe")
-#(module tut1)
+#(module tut3)
 ```
 and try it out:
 
