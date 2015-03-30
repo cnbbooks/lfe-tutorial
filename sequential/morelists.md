@@ -164,7 +164,38 @@ ok
 
 ### Utility Functions Revisited
 
-Remember a few sections back when we created the utility function for finding the maximum value in a list? Let's put that into action now: we want to add a function which finds the cities with the maximum and minimum temperatures. 
+Remember a few sections back when we created the utility function for finding the maximum value in a list? Let's put that into action now: we want to add a function which finds the cities with the maximum and minimum temperatures:
+
+```lisp
+(defun find-max-min
+  (((cons city tail))
+    (find-max-min tail city city)))
+
+(defun find-max-min
+  (((cons head tail) max-city min-city)
+   (find-max-min tail
+                 (compare-max head max-city)
+                 (compare-min head min-city)))
+  (('() max-city min-city)
+   (tuple max-city min-city)))
+
+(defun compare-max
+  (((= (tuple name1 (tuple 'C temp1)) city1)
+    (= (tuple name2 (tuple 'C temp2)) city2))
+   (if (> temp1 temp2)
+       city1
+       city2)))
+
+(defun compare-min
+  (((= (tuple name1 (tuple 'C temp1)) city1)
+    (= (tuple name2 (tuple 'C temp2)) city2))
+   (if (< temp1 temp2)
+       city1
+       city2)))
+```
+
+
+### The Complete Example
 
 ```lisp
 (defmodule tut13
