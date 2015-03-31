@@ -141,6 +141,8 @@ This changes the logic of the previous example in the following ways:
  
 ### Function Heads as Conditionals
 
+[forthcoming]
+
 ### The Extended ``cond`` Form
 
 The ``cond`` form has been extended with the extra test ``(?= <pattern> <expression>)`` which tests if the evaluated result of ``<expression>`` matches ``<pattern>``. If so, it binds the variables in ``<pattern>`` which can be used in the ``cond`` form. A optional guard is also allowed here. Here is an example of extended ``cond``:
@@ -155,3 +157,11 @@ The ``cond`` form has been extended with the extra test ``(?= <pattern> <express
 ```
 
 [update this section]
+
+### Example: Inches and Centimeters
+
+[forthcoming]
+
+### Example: Leap Years
+
+[forthcoming]
