@@ -76,9 +76,11 @@ Often times when using ``cond`` one needs a "default" or "fall-through" option t
 
 Any number that is negative will be caught by the last condition.
 
+[add pattern-matching example for cond]
+
 ### The ``case`` Form
 
-The ``case`` form is useful for situations where you want to check for multiple possible values of the same expression. It's general form is the following:
+The ``case`` form is useful for situations where you want to check for multiple possible values of the same expression. Without guards, the general form for ``case`` is the following:
 
 ```lisp
 (case <expression>
@@ -107,8 +109,37 @@ The following will happen with the ``case`` defined above:
  * Any list whose first element is the atom ``a`` will match the third caluse.
  * Anything *not* matching the first three clauses will be matched by the fourth.
  
+With guars, the case has the following general form:
 
-### Guards and Patterns as Conditionals
+```lisp
+(case <expression>
+  (<pattern1> [<guard1>] <expression1>)
+  (<pattern2> [<guard2>] <expression2>)
+  ...
+  (<patternn> [<guardn>] <expressionn>))
+```
+
+Let's update the previosu example with a couple guards:
+
+```lisp
+(case x
+  ((cons head '())
+   "Only one element")
+  ((list 1 2)
+   "Two element list")
+  ((list a _) (when (is_atom a))
+    "List starts with an atom")
+  ((cons _ (cons a _)) (when (is_tuple a))
+    "Second element is a tuple")
+  (_ "Anything goes"))
+```
+
+This changes the logic of the previous example in the following ways:
+ * Any list whose first element is an atom will match the third clause.
+ * Any list whose second element is a tuple will match the fourth clause.
+ * Anything *not* matching the first four clauses will be matched by the fifth.
+ 
+### Function Heads as Conditionals
 
 ### The Extended ``cond`` Form
 
@@ -122,3 +153,5 @@ The ``cond`` form has been extended with the extra test ``(?= <pattern> <express
        (zipit x))
       ... )
 ```
+
+[update this section]
