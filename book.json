@@ -22,8 +22,5 @@
     "pdf": {
         "pageNumbers": true,
         "paperSize": "a4"
-    },
-    "structure": {
-        "readme": "introduction.md"
     }
 }
