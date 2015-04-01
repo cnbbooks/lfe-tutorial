@@ -76,7 +76,36 @@ Often times when using ``cond`` one needs a "default" or "fall-through" option t
 
 Any number that is negative will be caught by the last condition.
 
-[add pattern-matching example for cond]
+In case you're wondering, yes: ``cond`` works with patterns as well. Let's take a look.
+
+### The Extended ``cond`` Form
+
+When we talked about ``cond`` above, we only discussed the form as any Lisper would be familiar. However, LFE has extended ``cond`` with additional capabilities provided via pattern matching. LFE's ``cond`` has the following general form when this is taken into consideration:
+
+```lisp
+(cond (<cond-clause1>)
+      (<cond-clause2>)
+      (<cond-clause3>)
+      ...
+      (<cond-clausen>))
+```
+
+where each ``<cond-clause>`` could be either as it is in the regular ``cond``, ``<predicate> <expression>`` or it could be ``(?= <pattern> [<guard>] <expression>)`` -- the latter being the extended form (with an optional guard). When using the extended form, instead of evaluating a predicate for its boolean result, the data passed to the ``cond`` is matched against the defined patterns: if the pattern succeeds, then the associated expression is evaluated. Here's an example:
+
+```lisp
+(cond ((?= (cons head '()) x)
+       "Only one element")
+      ((?= (list 1 2) x)
+       "Two element list")
+      ((?= (list a _) (when (is_atom a)) x)
+       "List starts with an atom")
+      ((?= (cons _ (cons a _)) (when (is_tuple a)) x)
+       "Second element is a tuple")
+      ('true "Anything goes"))
+```
+
+That form is rarely used, but it's there in case you ever need it.
+
 
 ### The ``case`` Form
 
@@ -90,7 +119,7 @@ The ``case`` form is useful for situations where you want to check for multiple 
   (<patternn> <expressionn>))
 ```
 
-So we could rewrite our ``cond`` above with the following ``case``:
+So we could rewrite the code for the non-extended ``cond`` above with the following ``case``:
 
 ```lisp
 (case x
@@ -109,7 +138,7 @@ The following will happen with the ``case`` defined above:
  * Any list whose first element is the atom ``a`` will match the third caluse.
  * Anything *not* matching the first three clauses will be matched by the fourth.
  
-With guars, the case has the following general form:
+With guards, the case has the following general form:
 
 ```lisp
 (case <expression>
@@ -119,7 +148,7 @@ With guars, the case has the following general form:
   (<patternn> [<guardn>] <expressionn>))
 ```
 
-Let's update the previosu example with a couple guards:
+Let's update the previous example with a couple of guards:
 
 ```lisp
 (case x
@@ -141,22 +170,61 @@ This changes the logic of the previous example in the following ways:
  
 ### Function Heads as Conditionals
 
-[forthcoming]
+Another very common way to express conditional logic in LFE is through the use of pattern matching in function heads. This has the capacity to make code *very* concise while also remaining clear to read -- thus its prevelant use.
 
-### The Extended ``cond`` Form
-
-The ``cond`` form has been extended with the extra test ``(?= <pattern> <expression>)`` which tests if the evaluated result of ``<expression>`` matches ``<pattern>``. If so, it binds the variables in ``<pattern>`` which can be used in the ``cond`` form. A optional guard is also allowed here. Here is an example of extended ``cond``:
+As we've seen, a regular LFE function takes the following form (where the arguments are optional):
 
 ```lisp
-(cond ((foo x) ...)
-      ((?= (cons head tail) (when (is_atom head)) (bar y))
-       (fubar tail (baz head)))
-      ((?= (tuple 'ok x) (baz y))
-       (zipit x))
-      ... )
+(defun <function-name> ([<arg1> ... <argn>])
+  <body>)
 ```
 
-[update this section]
+When pattern matching in the function head, the form is as follows:
+
+```lisp
+(defun <function-name>
+ ((<pattern1>) [<guard1>]
+   <body1>)
+ ((<pattern2>) [<guard2>]
+   <body2>)
+ ...
+ ((<patternn>) [<guardn>]
+   <bodyn>))
+```
+
+Note that simple patterns with no expressions are just regular function arguments. In other words ``<pattern1>``, ``<pattern2>``, etc., may be either a full pattern or they may be simple function arguments. The guards are optional.
+
+Let's try this out by rewriting the silly ``case`` example above to use a function with pattern-matching in the function heads:
+
+```lisp
+(defun check-val
+  (((cons head '()))
+   "Only one element")
+  (((list 1 2))
+   "Two element list")
+  (((list a _)) (when (is_atom a))
+    "List starts with an atom")
+  (((cons _ (cons a _))) (when (is_tuple a))
+    "Second element is a tuple")
+  ((_) "Anything goes"))
+```
+
+If you run that in the REPL, you can test it out with the following:
+
+```lisp
+> (check-val '(1))
+"Only one element"
+> (check-val '(a 1))
+"List starts with an atom"
+> (check-val '(1 #(b 2)))
+"Second element is a tuple"
+> (check-val 42)
+"Anything goes"
+```
+
+And there you have LFE function definitions with much of the power of ``if``, ``cond``, and ``case``!
+
+Let's use some of these forms in actual code now ...
 
 ### Example: Inches and Centimeters
 
