@@ -24,7 +24,7 @@ We will see more details of this later (*manual*). If you want to experiment wit
 Here is the ping pong example modified to run on two separate nodes:
 
 ```lisp
-(defmodule tut17
+(defmodule tut21
   (export (start-ping 1) (start-pong 0) (ping 2) (pong 0)))
 
 (defun ping
@@ -47,10 +47,10 @@ Here is the ping pong example modified to run on two separate nodes:
      (pong))))
 
 (defun start-pong ()
-  (register 'pong (spawn 'tut17 'pong ())))
+  (register 'pong (spawn 'tut21 'pong ())))
 
 (defun start-ping (pong-node)
-  (spawn 'tut17 'ping (list 3 pong-node)))
+  (spawn 'tut21 'ping (list 3 pong-node)))
 ```
 
 Let us assume we have two computers called gollum and kosken. We will start a node on kosken called ping and then a node on gollum called pong.
@@ -78,14 +78,14 @@ LFE Shell V6.0 (abort with ^G)
 Now start the "pong" process on gollum:
 
 ```
-(pong@gollum)> (tut17:start-pong)
+(pong@gollum)> (tut21:start-pong)
 true
 ```
 
 and start the "ping" process on kosken (from the code above you will see that a parameter of the ``start-ping`` function is the node name of the Erlang system where "pong" is running):
 
 ```
-(ping@kosken)> (tut17:start-ping 'pong@gollum)
+(ping@kosken)> (tut21:start-ping 'pong@gollum)
 <0.41.0>
 (ping@kosken)> Ping received pong
 Ping received pong
@@ -103,7 +103,7 @@ Pong received ping
 Pong finished
 ```
 
-Looking at the ``tut17`` code we see that the ``pong`` function itself is unchanged, the lines:
+Looking at the ``tut21`` code we see that the ``pong`` function itself is unchanged, the lines:
 
 ```lisp
     ((tuple 'ping ping-pid)
@@ -124,7 +124,7 @@ We use a tuple ``#(registered-name node-name)`` instead of just the ``registered
 In the previous example, we started "ping" and "pong" from the shells of two separate Erlang nodes. ``spawn`` can also be used to start processes in other nodes. The next example is the ping pong program, yet again, but this time we will start "ping" in another node:
 
 ```lisp
-(defmodule tut18
+(defmodule tut22
   (export (start 1) (ping 2) (pong 0)))
 
 (defun ping
@@ -147,8 +147,8 @@ In the previous example, we started "ping" and "pong" from the shells of two sep
      (pong))))
 
 (defun start (ping-node)
-  (register 'pong (spawn 'tut18 'pong ()))
-  (spawn ping-node 'tut18 'ping (list 3 (node))))
+  (register 'pong (spawn 'tut22 'pong ()))
+  (spawn ping-node 'tut22 'ping (list 3 (node))))
 ```
 
 The function ``node/0`` returns the name of the current node.
@@ -156,7 +156,7 @@ The function ``node/0`` returns the name of the current node.
 Assuming an LFE system called ``ping`` (but not the "ping" process) has already been started on kosken, then on gollum we do:
 
 ```
-(pong@gollum)> (tut18:start 'ping@kosken)
+(pong@gollum)> (tut22:start 'ping@kosken)
 <8524.50.0>
 (pong@gollum)> Pong received ping
 Ping received pong
