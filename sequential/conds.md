@@ -230,6 +230,11 @@ Let's use some of these forms in actual code now ...
 
 [forthcoming]
 
+[tutorial #14]
+
+
 ### Example: Leap Years
 
 [forthcoming]
+
+[tutorial #15]
