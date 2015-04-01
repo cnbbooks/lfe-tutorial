@@ -7,7 +7,7 @@ One of the main reasons for using LFE/Erlang instead of other functional languag
 The LFE BIF ``spawn`` is used to create a new process: ``(spawn module exported-function list-of-arguments)``. Consider the following module:
 
 ```lisp
-(defmodule tut14
+(defmodule tut18
   (export (start 0) (say-something 2)))
 
 (defun say-something
@@ -17,14 +17,14 @@ The LFE BIF ``spawn`` is used to create a new process: ``(spawn module exported-
    (say-something what (- times 1))))
 
 (defun start ()
-  (spawn 'tut14 'say-something '(hello 3))
-  (spawn 'tut14 'say-something '(goodbye 3)))
+  (spawn 'tut18 'say-something '(hello 3))
+  (spawn 'tut18 'say-something '(goodbye 3)))
 ```
 
 ```lisp
-> (c "tut14.lfe")
-#(module tut14)
-> (tut14:say-something 'hello 3)
+> (c "tut18.lfe")
+#(module tut18)
+> (tut18:say-something 'hello 3)
 hello
 hello
 hello
@@ -34,7 +34,7 @@ done
 We can see that function ``say-something`` writes its first argument the number of times specified by second argument. Now look at the function ``start``. It starts two LFE processes, one which writes "hello" three times and one which writes "goodbye" three times. Both of these processes use the function ``say-something``. Note that a function used in this way by ``spawn`` to start a process must be exported from the module (i.e. in the (export ... ) at the start of the module).
 
 ```lisp
-> (tut14:start)
+> (tut18:start)
 <0.37.0>
 hello
 goodbye
@@ -47,7 +47,7 @@ goodbye
 Notice that it didn't write "hello" three times and then "goodbye" three times, but the first process wrote a "hello", the second a "goodbye", the first another "hello" and so forth. But where did the <0.37.0> come from? The return value of a function is of course the return value of the last "thing" in the function. The last thing in the function ``start`` is
 
 ```lisp
-(spawn 'tut14 'say-something '(goodbye 3))
+(spawn 'tut18 'say-something '(goodbye 3))
 ```
 
 ``spawn`` returns a *process identifier*, or *pid*, which uniquely identifies the process. So <0.37.0> is the pid of the spawn function call above. We will see how to use pids in the next example.
