@@ -9,7 +9,7 @@ In the above example, we first created "pong" so as to be able to give the ident
 We will now re-write the ping pong example using this and giving the name ``pong`` to the "pong" process:
 
 ```lisp
-(defmodule tut16
+(defmodule tut20
   (export (start 0) (ping 1) (pong 0)))
 
 (defun ping
@@ -32,15 +32,15 @@ We will now re-write the ping pong example using this and giving the name ``pong
      (pong))))
 
 (defun start ()
-  (let ((pong-pid (spawn 'tut16 'pong ())))
+  (let ((pong-pid (spawn 'tut20 'pong ())))
     (register 'pong pong-pid)
-    (spawn 'tut16 'ping '(3))))
+    (spawn 'tut20 'ping '(3))))
 ```
 
 ```lisp
-> (c "tut16")
-#(module tut16)
-> (tut16:start)
+> (c "tut20")
+#(module tut20)
+> (tut20:start)
 <0.36.0>
 > Pong received ping
 Ping received pong
