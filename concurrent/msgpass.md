@@ -3,7 +3,7 @@
 In the following example we create two processes which send messages to each other a number of times.
 
 ```lisp
-(defmodule tut15
+(defmodule tut19
   (export (start 0) (ping 2) (pong 0)))
 
 (defun ping
@@ -26,14 +26,14 @@ In the following example we create two processes which send messages to each oth
      (pong))))
 
 (defun start ()
-  (let ((pong-pid (spawn 'tut15 'pong ())))
-    (spawn 'tut15 'ping (list 3 pong-pid))))
+  (let ((pong-pid (spawn 'tut19 'pong ())))
+    (spawn 'tut19 'ping (list 3 pong-pid))))
 ```
 
 ```lisp
-> (c "tut15.lfe")
-#(module tut15)
-> (tut15:start)
+> (c "tut19.lfe")
+#(module tut19)
+> (tut19:start)
 <0.36.0>
 > Pong received ping
 Ping received pong
@@ -48,19 +48,19 @@ Pong finished
 The function ``start`` first creates a process, let's call it "pong":
 
 ```lisp
-(let ((pong-pid (spawn 'tut15 'pong ())))
+(let ((pong-pid (spawn 'tut19 'pong ())))
 ```
 
-This process executes ``(tut15:pong)``. ``pong-pid`` is the process identity of the "pong" process. The function ``start`` now creates another process "ping".
+This process executes ``(tut19:pong)``. ``pong-pid`` is the process identity of the "pong" process. The function ``start`` now creates another process "ping".
 
 ```lisp
-(spawn 'tut15 'ping (list 3 pong-pid))))
+(spawn 'tut19 'ping (list 3 pong-pid))))
 ```
 
 this process executes:
 
 ```lisp
-(tut15:ping (list 3 pong-pid))
+(tut19:ping (list 3 pong-pid))
 ```
 
 <0.36.0> is the return value from the ``start`` function.
@@ -123,7 +123,7 @@ I.e. ``message`` (any LFE term) is sent to the process with indentity ``pid``.
 After sending the message ``pong``, to the process "ping", "pong" calls the ``pong`` function again, which causes it to get back to the ``receive`` again and wait for another message. Now let's look at the process "ping". Recall that it was started by executing:
 
 ```lisp
-(tut15:ping 3 pong-pid)
+(tut19:ping 3 pong-pid)
 ```
 
 Looking at the function ``ping/2`` we see that the second clause of ``ping/2`` is executed since the value of the first argument is 3 (not 0) (first clause head is ``(0 pong-pid)``, second clause head is ``(n pong-pid)``, so ``n`` becomes 3).
