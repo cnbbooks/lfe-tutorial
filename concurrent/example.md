@@ -14,7 +14,7 @@ We will set up the messenger by allowing "clients" to connect to a central serve
 
 File ``messenger.lfe``:
 
-```cl
+```lisp
 ;;; Message passing utility.  
 ;;; User interface:
 ;;; (logon name)
@@ -194,14 +194,14 @@ We start up four Erlang nodes, messenger@super, c1@bilbo, c2@kosken, c3@gollum.
 
 First we start up a the server at messenger@super:
 
-```cl
+```lisp
 (messenger@super)> (messenger:start-server)
 true
 ```
 
 Now Peter logs on at c1@bilbo:
 
-```cl
+```lisp
 (c1@bilbo)> (messenger:logon 'peter)
 true
 logged-on
@@ -209,7 +209,7 @@ logged-on
 
 James logs on at c2@kosken:
 
-```cl
+```lisp
 (c2@kosken)> (messenger:logon 'james)
 true
 logged-on
@@ -217,7 +217,7 @@ logged-on
 
 and Fred logs on at c3@gollum:
 
-```cl
+```lisp
 (c3@gollum)> (messenger:logon 'fred)
 true
 logged-on
@@ -225,7 +225,7 @@ logged-on
 
 Now Peter sends Fred a message:
 
-```cl
+```lisp
 (c1@bilbo)> (messenger:message 'fred "hello")
 ok
 sent
@@ -233,7 +233,7 @@ sent
 
 And Fred receives the message and sends a message to Peter and logs off:
 
-```cl
+```lisp
 Message from peter: "hello"
 (c3@gollum)> (messenger:message 'peter "go away, I'm busy")
 ok
@@ -244,7 +244,7 @@ logoff
 
 James now tries to send a message to Fred:
 
-```cl
+```lisp
 (c2@kosken)> (messenger:message 'fred "peter doesn't like you")
 ok
 receiver-not-found
@@ -260,7 +260,7 @@ Note how we write the ``server`` function so that it calls itself, ``(server use
 
 We use functions in the ``lists`` module. This is a very useful module and a study of the manual page is recommended (erl -man lists). ``(lists:keymember key position lists)`` looks through a list of tuples and looks at ``position`` in each tuple to see if it is the same as ``key``. The first element is position 1. If it finds a tuple where the element at ``position`` is the same as ``key``, it returns ``true``, otherwise ``false``.
 
-```cl
+```lisp
 > (lists:keymember 'a 2 '(#(x y z) #(b b b) #(b a c) #(q r s))) 
 true
 > (lists:keymember 'p 2 '(#(x y z) #(b b b) #(b a c) #(q r s))) 
@@ -269,14 +269,14 @@ false
 
 ``lists:keydelete`` works in the same way but deletes the first tuple found (if any) and returns the remaining list:
 
-```cl
+```lisp
 > (lists:keymember 'a 2 '(#(x y z) #(b b b) #(b a c) #(q r s))) 
 (#(x y z) #(b b b) #(q r s))
 ```
 
 ``lists:keyfind`` is like ``lists:keymember``, but it returns the tuple found or the atom ``false``:
 
-```cl
+```lisp
 > (lists:keyfind 'a 2 '(#(x y z) #(b b b) #(b a c) #(q r s)))
 #(b a c)
 > (lists:keyfind 'p 2 '(#(x y z) #(b b b) #(b a c) #(q r s))) 
@@ -295,25 +295,25 @@ You should by now be able to understand most of the code above so I'll just go t
 
 The first user "sends" the message in the example above by:
 
-```cl
+```lisp
 (messenger:message 'fred "hello")
 ```
 
 After testing that the client process exists:
 
-```cl
+```lisp
 (whereis 'mess-client)
 ```
 
 and a message is sent to ``mess-client``:
 
-```cl
+```lisp
 (! 'mess-client #(message-to fred "hello"))
 ```
 
 The client sends the message to the server by:
 
-```cl
+```lisp
 (! #(messenger messenger@renat) (tuple (self) 'message-to 'fred "hello"))
 ```
 
@@ -321,55 +321,55 @@ and waits for a reply from the server.
 
 The server receives this message and calls:
 
-```cl
+```lisp
 (server-transfer from 'fred "hello" user-list)
 ```
 
 which checks that the pid ``from`` is in the ``user-list``:
 
-```cl
+```lisp
 (lists:keyfind from 1 user-list) 
 ```
 
 If ``keyfind`` returns the atom ``false``, some sort of error has occurred and the server sends back the message:
 
-```cl
+```lisp
 (! from-pid #(messenger stop you-are-not-logged-on))
 ```
 
 which is received by the client which in turn does ``(exit 'normal)`` and terminates. If ``keyfind`` returns ``(tuple from name)`` we know that the user is logged on and is his name (peter) is in variable ``name``. We now call:
 
-```cl
+```lisp
 (server-transfer from 'peter 'fred "hello" user-list)
 ```
 
 Note that as this is ``server-transfer/5`` it is not the same as the previous function ``server_transfer/4``. We do another ``keyfind`` on ``user-list`` to find the pid of the client corresponding to fred:
 
-```cl
+```lisp
 (lists:keyfind 'fred 2 user-list)
 ```
 
 This time we use argument 2 which is the second element in the tuple. If this returns the atom ``false`` we know that fred is not logged on and we send the message:
 
-```cl
+```lisp
 (! from-pid #(messenger receiver-not-found)
 ```
 
 which is received by the client, if ``keyfind`` returns:
 
-```cl
+```lisp
 (tuple to-pid 'fred)
 ```
 
 we send the message:
 
-```cl
+```lisp
 (! to-pid #(message-from peter "hello"))
 ```
 
 to fred's client and the message:
 
-```cl
+```lisp
 (! from-pid #(messenger sent))
 ```
 
@@ -377,7 +377,7 @@ to peter's client.
 
 Fred's client receives the message and prints it:
 
-```cl
+```lisp
 ((tuple 'message-from from-name message)
  (lfe_io:format "Message from ~p: ~p~n" (list from-name message))))
 ```
