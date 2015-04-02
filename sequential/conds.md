@@ -12,8 +12,8 @@ In both of those functions, we introduced the new ``if`` form. If works as follo
 
 ```lisp
 (if <predicate>
-    <expression1>
-    <expression2>)
+  <expression1>
+  <expression2>)
 ```
 
 where ``<expression 1>`` is executed if ``<predicate>`` evaluates to ``true`` and ``<expression 2>`` is executed if ``<predicate>`` evaluates to ``false``. If you have used other programming languages, then this will be quite familiar to you. If you have not, if should remind you a bit of the logic we looked at when discussing guards.
@@ -31,8 +31,8 @@ Or -- you will be more familiar with this -- our code from the last section:
 
 ```lisp
 (if (< temp1 temp2)
-    city1
-    city2)
+  city1
+  city2)
 ```
 where, if ``temp1`` is less than ``temp2``, the value stored in ``city1`` is returned. 
 

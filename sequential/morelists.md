@@ -183,15 +183,15 @@ Remember a few sections back when we created the utility function for finding th
   (((= (tuple name1 (tuple 'C temp1)) city1)
     (= (tuple name2 (tuple 'C temp2)) city2))
    (if (> temp1 temp2)
-       city1
-       city2)))
+     city1
+     city2)))
 
 (defun compare-min
   (((= (tuple name1 (tuple 'C temp1)) city1)
     (= (tuple name2 (tuple 'C temp2)) city2))
    (if (< temp1 temp2)
-       city1
-       city2)))
+     city1
+     city2)))
 ```
 
 
@@ -238,15 +238,15 @@ Remember a few sections back when we created the utility function for finding th
   (((= (tuple name1 (tuple 'C temp1)) city1)
     (= (tuple name2 (tuple 'C temp2)) city2))
    (if (> temp1 temp2)
-       city1
-       city2)))
+     city1
+     city2)))
 
 (defun compare-min
   (((= (tuple name1 (tuple 'C temp1)) city1)
     (= (tuple name2 (tuple 'C temp2)) city2))
    (if (< temp1 temp2)
-       city1
-       city2)))
+     city1
+     city2)))
 
 (defun print-max-min
   (((tuple (tuple max-name (tuple 'C max-temp))
