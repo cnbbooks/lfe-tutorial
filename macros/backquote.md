@@ -77,6 +77,15 @@ Comma-at is like comma but splices its argument which should be a list. As the b
     (lfe_io:format "~-15w ~w C~n" `(,name ,temp))))
 ```
 
+Using the backquote macro also makes it much easier to build expressions which we can evaluate with ``eval``. So if we want to import values into the expression to evaluate we can do it like this:
+
+```lisp
+> (set expr '(* x y))                   ;Expression to evaluate
+(* x y)
+> (eval `(let ((x 17) (y 42)) ,expr))
+714
+```
+
 ----
 
 [^1]: In LFE the backquote is a normal macro and is expanded at the same time as other macros. When they are parsed `` `thing`` becomes ``(backquote thing)``, ``,thing`` becomes ``(unquote thing)`` and ``,@thing`` becomes ``(unquote-splicing thing)``.

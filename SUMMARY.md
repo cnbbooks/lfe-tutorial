@@ -34,6 +34,7 @@
    * [Header Files](records/headers.md)
    * [Records](records/records.md)
 * [Macros](macros/introduction.md)
+   * [Eval](macros/eval.md)
    * [Macros](macros/macros.md)
    * [The Backquote Macro](macros/backquote.md)
 * [Conclusion](conclusion/introduction.md)
