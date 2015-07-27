@@ -13,7 +13,7 @@ The form ``eval`` takes an LFE data structure and evaluates it as an expression 
 
 Using ``eval`` is one way way to merge lists and code. However, it is not a very good way:
 
-- It is inefficient as the input expression is evaluated by ``lfe_eval`` the LFE interpreter. This is much slower than running compiled code.
+- It is inefficient as the input expression is evaluated by the LFE interpreter, ``lfe_eval``. This is much slower than running compiled code.
 
 - The expression is evaluated without a lexical context. So calling ``eval`` inside a ``let`` does not allow the evaluated expression to refer to variables bound by the ``let``:
 
