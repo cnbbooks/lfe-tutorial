@@ -1,6 +1,6 @@
 ## Conditionals
 
-In the module ``tut13.lfe``, we saw our first conditional, the ``(if ...)`` form. We're going to spendthe rest of this section discussing ``if``, ``cond``, ``case``, as well as the use of guards and pattern matching to form conditional code branches.
+In the module ``tut13.lfe``, we saw our first conditional, the ``(if ...)`` form. We're going to spend the rest of this section discussing ``if``, ``cond``, ``case``, as well as the use of guards and pattern matching to form conditional code branches.
 
 ### The ``if`` Form
 
@@ -16,7 +16,7 @@ In both of those functions, we introduced the new ``if`` form. If works as follo
   <expression2>)
 ```
 
-where ``<expression 1>`` is executed if ``<predicate>`` evaluates to ``true`` and ``<expression 2>`` is executed if ``<predicate>`` evaluates to ``false``. If you have used other programming languages, then this will be quite familiar to you. If you have not, if should remind you a bit of the logic we looked at when discussing guards.
+where ``<expression1>`` is executed if ``<predicate>`` evaluates to ``true`` and ``<expression2>`` is executed if ``<predicate>`` evaluates to ``false``. If you have used other programming languages, then this will be quite familiar to you. If you have not, if should remind you a bit of the logic we looked at when discussing guards.
 
 We can see it in action with the following LFE session in the REPL:
 
@@ -90,7 +90,7 @@ When we talked about ``cond`` above, we only discussed the form as any Lisper wo
       (<cond-clausen>))
 ```
 
-where each ``<cond-clause>`` could be either as it is in the regular ``cond``, ``<predicate> <expression>`` or it could be ``(?= <pattern> [<guard>] <expression>)`` -- the latter being the extended form (with an optional guard). When using the extended form, instead of evaluating a predicate for its boolean result, the data passed to the ``cond`` is matched against the defined patterns: if the pattern succeeds, then the associated expression is evaluated. Here's an example:
+where each ``<cond-clause>`` could be either as it is in the regular ``cond``, ``<predicate> <expression>`` or it could be ``(?= <pattern> [<guard>] <expression>)`` -- the latter being the extended form (with an optional guard). When using the extended form, instead of evaluating a predicate for its boolean result, the data passed to the ``cond`` is matched against the defined patterns: if the pattern match succeeds, then the associated expression is evaluated. Here's an example:
 
 ```lisp
 (cond ((?= (cons head '()) x)
@@ -104,7 +104,7 @@ where each ``<cond-clause>`` could be either as it is in the regular ``cond``, `
       ('true "Anything goes"))
 ```
 
-That form is rarely used, but it's there in case you ever need it.
+That form is not that often used, but it can be very practical.
 
 
 ### The ``case`` Form

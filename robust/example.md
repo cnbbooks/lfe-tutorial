@@ -52,7 +52,7 @@ Now we return to the messenger program and add changes which make it more robust
 
 (defmodule messenger
   (export (start-server 0) (server 0)
-	  (logon 1) (logoff 0) (message 2) (client 2)))
+          (logon 1) (logoff 0) (message 2) (client 2)))
 
 ;;; Change the function below to return the name of the node where the
 ;;; messenger server runs

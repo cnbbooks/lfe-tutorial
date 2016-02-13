@@ -26,3 +26,7 @@ publish: build
 	-git commit -a && git push origin master
 	git subtree push --prefix $(PROD_DIR) origin gh-pages
 
+force: build
+	-git commit -a --amend && git push --force origin master
+	git subtree push --prefix $(PROD_DIR) origin gh-pages
+

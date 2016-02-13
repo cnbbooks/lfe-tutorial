@@ -1,7 +1,7 @@
 ## The Erlang Standard Library
 
 ### ``man`` Pages and Online Docs
-Erlang has a lot of standard modules to help you do things. For example, the module ``io`` contains a lot of functions to help you perform various acts of formatted input/output. Depending upon your Erlang installation, you may have man pages available. From your operating system shell, you can found out by typing ``erl -man <module name>`` like so:
+Erlang has a lot of standard modules to help you do things which are directly callable from LFE. For example, the module ``io`` contains a lot of functions to help you perform various acts of formatted input/output. Depending upon your Erlang installation, you may have man pages available. From your operating system shell, you can found out by typing ``erl -man <module name>`` like so:
 
 ```bash
 $ erl -man io

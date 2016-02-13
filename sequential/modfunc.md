@@ -2,7 +2,7 @@
 
 ### Creating a Simple Module
 
-A programming language isn't much use if you can only run code from a REPL. So next we will write a small LFE program in a file on the file system. In the same directory that you started the LFE REPL, create a new file called ``tut.lfe`` (the filename is **important**: be sure you type it just as we have) using your favorite text editor.
+A programming language isn't much use if you can only run code from a REPL. So next we will write a small LFE program in a file on the file system. In the same directory that you started the LFE REPL, create a new file called ``tut1.lfe`` (the filename is **important**: be sure you type it just as we have) using your favorite text editor.
 
 Here's the code to enter:
 
@@ -47,7 +47,7 @@ In LFE, whenever we use a function that has been defined in another module, we u
 > (tut1:double 108)
 ```
 
-means "call the function ``double`` in the module ``tut`` with the argument of ``108``.
+means "call the function ``double`` in the module ``tut1`` with the argument of ``108``.
 
 The second line tells LFE which functions we will be exporting -- in this case, all of them (which is only *one* ...):
 
@@ -62,11 +62,11 @@ If we wanted to be explicit about which functions were to be exported, we would 
   (export (double 1)))
 ```
 
-That says "in the module ``tut``, please make available the function called ``double`` which takes one argument" (``x`` in our example). By "make available" we mean that this function can be called from outside the module ``tut``.
+That says "in the module ``tut1``, please make available the function called ``double`` which takes one argument" (``x`` in our example). By "make available" we mean that this function can be called from outside the module ``tut1``.
 
 ### A More Complicated Example
 
-Now for a more complicated example, the factorial of a number (e.g. factorial of 4 is 4 * 3 * 2 * 1). Enter the following code in a file called ``tut1.lfe``.
+Now for a more complicated example, the factorial of a number (e.g. factorial of 4 is 4 * 3 * 2 * 1). Enter the following code in a file called ``tut2.lfe``.
 
 ```lisp
 (defmodule tut2

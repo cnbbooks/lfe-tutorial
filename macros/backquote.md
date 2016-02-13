@@ -54,14 +54,21 @@ expands to
 (tuple 'a a 'b b)
 ```
 
-They are very useful in macros as we can write a macro definitions which look like the expansions they produce. For example we could define ``unless`` as:
+They are very useful in macros as we can write a macro definitions which look like the expansions they produce. For example we could define the ``unless`` from the previous section as:
 
 ```lisp
 (defmacro unless
-  ((cons test body) `(if (not ,test) ,@body)))
+  ((cons test body) `(if (not ,test) (progn ,@body))))
 ```
 
-Comma-at is like comma but splices its argument which should be a list. As the backquote macro expands to the expression which would build the template it is also very useful in patterns as we can use a template to describe the pattern. Here is the [Converting Temperature](../sequential/example.md) example rewritten to use backquote in both the patterns and constructors:
+Here we have extended it allow multiple forms in the body. Comma-at is like comma but splices its argument which should be a list. So for example:
+
+```lisp
+> (macroexpand '(unless (test x) (first-do) (second-do)) $ENV)
+(if (not (test x)) (progn (first-do) (second-do)))
+```
+
+As the backquote macro expands to the expression which would build the template it is also very useful in patterns as we can use a template to describe the pattern. Here is the [Converting Temperature](../sequential/example.md) example rewritten to use backquote in both the patterns and constructors:
 
 ```lisp
 (defun f->c
@@ -88,4 +95,4 @@ Using the backquote macro also makes it much easier to build expressions which w
 
 ----
 
-[^1]: In LFE the backquote is a normal macro and is expanded at the same time as other macros. When they are parsed `` `thing`` becomes ``(backquote thing)``, ``,thing`` becomes ``(unquote thing)`` and ``,@thing`` becomes ``(unquote-splicing thing)``.
+[^1] In LFE the backquote is a normal macro and is expanded at the same time as other macros. When they are parsed `` `thing`` becomes ``(backquote thing)``, ``,thing`` becomes ``(comma thing)`` and ``,@thing`` becomes ``(comma-at thing)``.

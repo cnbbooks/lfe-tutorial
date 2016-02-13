@@ -82,4 +82,4 @@ We only made a change to the second clause: we assigned the value of ``head`` to
 
 ----
 
-[^1]: We are not going to apologize for that pun.
+[^1] We are not going to apologize for that pun.

@@ -191,4 +191,4 @@ We update the ``dst`` map with new channel values. The syntax for updating an ex
 
 ----
 
-[^1]: Note the use of the slash and number after the function name. We will be discussing this more in a future section, though before we get there you will see this again. Until we get to the full explanation, just know that the number represents the arity of a given function and this helps us be explicit about which function we mean.
+[^1] Note the use of the slash and number after the function name. We will be discussing this more in a future section, though before we get there you will see this again. Until we get to the full explanation, just know that the number represents the arity of a given function and this helps us be explicit about which function we mean.
