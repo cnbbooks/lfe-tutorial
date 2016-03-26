@@ -30,7 +30,7 @@ Compile and test:
 #(inch 5.0)
 ```
 
-Note that in the last call we convert 5 inches to centimeters and back again and reassuringly get back to the original value. I.e the argument to a function can be the result of another function. Pause for a moment and consider how that line (above) works. The argument we have given the #function ``#(inch 5)`` is first matched against the first head clause of ``convert-length`` i.e. in ``((tuple 'centimeter x))`` where it can be seen that the pattern ``(tuple 'centimeter x)`` does not match ``#(inch 5)`` (the *head* is the bit first bit in the clause with a list of argument patterns). This having failed, we try the head of the next clause i.e. ``((tuple 'inch y))``, this pattern matches ``#(inch 5)`` and y gets the value 5.
+Note that in the last call we convert 5 inches to centimeters and back again and reassuringly get back to the original value. I.e the argument to a function can be the result of another function. Pause for a moment and consider how that line (above) works. The argument we have given the function ``#(inch 5)`` is first matched against the first head clause of ``convert-length`` i.e. in ``((tuple 'centimeter x))`` where it can be seen that the pattern ``(tuple 'centimeter x)`` does not match ``#(inch 5)`` (the *head* is the first bit in the clause with a list of argument patterns). This having failed, we try the head of the next clause i.e. ``((tuple 'inch y))``, this pattern matches ``#(inch 5)`` and ``y`` gets the value 5.
 
 We have shown tuples with two parts above, but tuples can have as many parts as we want and contain any valid LFE **term**. For example, to represent the temperature of various cities of the world we could write
 
