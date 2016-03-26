@@ -133,9 +133,9 @@ Now let's try it out, first compiling it:
 #M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
 > (set color-2 (tut7:new 1.0 0.8 0.1 0.3))
 #M(alpha 0.3 blue 0.1 green 0.8 red 1.0)
-> (color:blend color-1 color-2)
+> (tut7:blend color-1 color-2)
 #M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
-> (color:blend color-2 color-1)
+> (tut7:blend color-2 color-1)
 #M(alpha 1.0 blue 0.38 green 0.52 red 0.51)
 ```
 
