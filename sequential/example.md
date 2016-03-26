@@ -16,9 +16,9 @@ Now for a larger example to consolidate what we have learnt so far. Assume we ha
     (format-temps rest)))
 
 (defun f->c
-  (((tuple name (tuple 'C temp))
+  (((tuple name (tuple 'C temp)))
     ;; No conversion needed
-    (tuple name (tuple 'C temp))))
+    (tuple name (tuple 'C temp)))
   (((tuple name (tuple 'F temp)))
     ;; Do the conversion
     (tuple name (tuple 'C (/ (* (- temp 32) 5) 9)))))
