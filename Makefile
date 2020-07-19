@@ -1,32 +1,22 @@
-STAGING_HOST=staging-docs.lfe.io
-STAGING_PATH=/var/www/lfe/staging-docs/quick-start
+BIN = mdbook
+GEN := $(shell which $(BIN) 2> /dev/null)
+DOWNLOAD = https://github.com/rust-lang/mdBook/releases
 
-SRC=./
-BASE_DIR=$(shell pwd)
-PROD_DIR=_book
-PROD_PATH=$(BASE_DIR)/$(PROD_DIR)
-STAGE_DIR=$(PROD_DIR)
-STAGE_PATH=$(BASE_DIR)/$(STAGE_DIR)
+define BINARY_ERROR
 
-setup:
-	@npm install gitbook -g
-	@npm install gitbook-plugin-ga -g
+No $(BIN) found in Path.
+
+Download $(BIN) from $(DOWNLOAD).
+
+endef
 
 build:
-	gitbook build $(SRC) --output=$(PROD_DIR)
+ifndef GEN
+	$(error $(BINARY_ERROR))
+endif
+	@$(GEN) build
 
-run:
-	gitbook serve $(SRC)
+serve:
+	@$(GEN) serve
 
-staging: build
-	git pull origin master && \
-	rsync -azP ./$(STAGE_DIR)/* $(STAGING_HOST):$(STAGING_PATH)
-
-publish: build
-	-git commit -a && git push origin master
-	git subtree push --prefix $(PROD_DIR) origin gh-pages
-
-force: build
-	-git commit -a --amend && git push --force origin master
-	git subtree push --prefix $(PROD_DIR) origin gh-pages
-
+run: serve
