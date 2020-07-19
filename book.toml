@@ -14,7 +14,7 @@ build-dir = "docs"
 [output.html]
 additional-css = ["css/custom.css"]
 google-analytics = "UA-38274766-4"
-git-repository-url = "https://github.com/lfe/rebar3-quick-start"
+git-repository-url = "https://github.com/lfe/tutorial/"
 [output.html.search]
 limit-results = 20
 use-boolean-and = true
