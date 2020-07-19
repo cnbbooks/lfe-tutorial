@@ -185,7 +185,7 @@
 <p>LFE translation by Robert Virding and Duncan McGreggor</p>
 <!-- Named page links below: /-->
 <h1><a class="header" href="#copyright" id="copyright">Copyright</a></h1>
-<p>© 1996-2012, Ericsson AB</p>
+<p>© 1996-2020, Ericsson AB</p>
 <p>© 2015, 2020 Robert Virding, Duncan McGreggor</p>
 <p>The contents of this file are subject to the Erlang Public License,
 Version 1.1, (the &quot;License&quot;); you may not use this file except in
@@ -1338,11 +1338,13 @@ lfe&gt; (check-val 42)
 <p>[tutorial #15]</p>
 <h2><a class="header" href="#built-in-functions" id="built-in-functions">Built-in Functions</a></h2>
 <p>[forthcoming]</p>
+<p>Ticket: <a href="https://github.com/lfe/tutorial/issues/7">https://github.com/lfe/tutorial/issues/7</a></p>
 <h2><a class="header" href="#higher-order-functions" id="higher-order-functions">Higher Order Functions</a></h2>
 <p>[forthcoming]</p>
 <h3><a class="header" href="#refactor-temperature-convertion-example" id="refactor-temperature-convertion-example">Refactor Temperature Convertion Example</a></h3>
 <p>[tutorial #16]</p>
 <p>[tutorial #17]</p>
+<p>Ticket: <a href="https://github.com/lfe/tutorial/issues/8">https://github.com/lfe/tutorial/issues/8</a></p>
 <h1><a class="header" href="#concurrent-programming" id="concurrent-programming">Concurrent Programming</a></h1>
 <p>In this chapter we will look at the basics of concurrent programming in LFE.</p>
 <h2><a class="header" href="#processes" id="processes">Processes</a></h2>
@@ -2319,10 +2321,13 @@ Pong exiting, got #(EXIT &lt;5627.44.0&gt; ping)
 <p>An interesting case is if the client was to terminate before the server links to it. This is taken care of because linking to a non-existent process causes an exit signal, <code>#(EXIT from noproc)</code>, to be automatically generated as if the process terminated immediately after the link operation.</p>
 <h1><a class="header" href="#records" id="records">Records</a></h1>
 <p>[forthcoming]</p>
+<p>Ticket: <a href="https://github.com/lfe/tutorial/issues/9">https://github.com/lfe/tutorial/issues/9</a></p>
 <h2><a class="header" href="#modularising" id="modularising">Modularising</a></h2>
 <p>[forthcoming]</p>
+<p>Ticket: <a href="https://github.com/lfe/tutorial/issues/9">https://github.com/lfe/tutorial/issues/9</a></p>
 <h2><a class="header" href="#header-files" id="header-files">Header Files</a></h2>
 <p>[forthcoming]</p>
+<p>Ticket: <a href="https://github.com/lfe/tutorial/issues/9">https://github.com/lfe/tutorial/issues/9</a></p>
 <h2><a class="header" href="#records-1" id="records-1">Records</a></h2>
 <p>A record is defined as:</p>
 <pre><code class="language-lisp">(defrecord &lt;name-of-record&gt; &lt;field-name-1&gt; &lt;field-name-2&gt; ...)
@@ -2466,6 +2471,7 @@ lfe&gt; (eval `(let ((x 17) (y 42)) ,expr))
 <p><sup class="footnote-reference"><a href="#1">1</a></sup> In LFE the backquote is a normal macro and is expanded at the same time as other macros. When they are parsed <code> `thing</code> becomes <code>(backquote thing)</code>, <code>,thing</code> becomes <code>(comma thing)</code> and <code>,@thing</code> becomes <code>(comma-at thing)</code>.</p>
 <h1><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h1>
 <p>[forthcoming]</p>
+<p>Ticket: <a href="https://github.com/lfe/tutorial/issues/10">https://github.com/lfe/tutorial/issues/10</a></p>
 
                 </main>
 

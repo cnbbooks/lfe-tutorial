@@ -1,6 +1,6 @@
 # Copyright
 
-© 1996-2012, Ericsson AB
+© 1996-2020, Ericsson AB
 
 © 2015, 2020 Robert Virding, Duncan McGreggor
 
