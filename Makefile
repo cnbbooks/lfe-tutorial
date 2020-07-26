@@ -18,7 +18,9 @@ build:
 ifndef GEN
 	$(error $(BINARY_ERROR))
 endif
+	$(MAKE) backup-book-git
 	@$(GEN) build
+	$(MAKE) restore-book-git
 
 serve:
 	@$(GEN) serve
