@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js lfe-pdp">
+
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>The REPL - The LFE Tutorial</title>
+    
+    
+
+
+    <!-- Custom HTML head -->
+    
+
+
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="Getting Started with LFE">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="../favicon.svg">
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="../fonts/fonts.css">
+    
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="../highlight.css">
+    <link rel="stylesheet" href="../tomorrow-night.css">
+    <link rel="stylesheet" href="../ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+    
+    <link rel="stylesheet" href="../css/custom.css">
+    
+
+    
+</head>
+
+<body>
+    <!-- Provide site root to javascript -->
+    <script type="text/javascript">
+        var path_to_root = "../";
+        var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "lfe-pdp" : "lfe-pdp";
+    </script>
+
+    <!-- Work around some values being stored in localStorage wrapped in quotes -->
+    <script type="text/javascript">
+        try {
+            var theme = localStorage.getItem('mdbook-theme');
+            var sidebar = localStorage.getItem('mdbook-sidebar');
+
+            if (theme.startsWith('"') && theme.endsWith('"')) {
+                localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+            }
+
+            if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+            }
+        } catch (e) { }
+    </script>
+
+    <!-- Set the theme before any content is loaded, prevents flash -->
+    <script type="text/javascript">
+        var theme;
+        try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
+        if (theme === null || theme === undefined) { theme = default_theme; }
+        var html = document.querySelector('html');
+        html.classList.remove('no-js')
+        html.classList.remove('lfe-pdp')
+        html.classList.add(theme);
+        html.classList.add('js');
+    </script>
+
+    <!-- Hide / unhide sidebar before it is displayed -->
+    <script type="text/javascript">
+        var html = document.querySelector('html');
+        var sidebar = 'hidden';
+        if (document.body.clientWidth >= 1080) {
+            try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
+            sidebar = sidebar || 'visible';
+        }
+        html.classList.remove('sidebar-visible');
+        html.classList.add("sidebar-" + sidebar);
+    </script>
+
+    <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+        <div class="sidebar-scrollbox">
+            <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> The LFE Tutorial</a></li><li class="chapter-item expanded "><a href="../front/copyright-page.html"><strong aria-hidden="true">2.</strong> Copyright Page</a></li><li class="chapter-item expanded "><a href="../introduction/index.html"><strong aria-hidden="true">3.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../introduction/erlang.html"><strong aria-hidden="true">3.1.</strong> About Erlang</a></li><li class="chapter-item expanded "><a href="../introduction/lfe.html"><strong aria-hidden="true">3.2.</strong> About LFE</a></li><li class="chapter-item expanded "><a href="../introduction/deps.html"><strong aria-hidden="true">3.3.</strong> Dependencies</a></li><li class="chapter-item expanded "><a href="../introduction/install.html"><strong aria-hidden="true">3.4.</strong> Installing LFE</a></li></ol></li><li class="chapter-item expanded "><a href="../sequential/index.html"><strong aria-hidden="true">4.</strong> Sequential Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sequential/repl.html" class="active"><strong aria-hidden="true">4.1.</strong> The REPL</a></li><li class="chapter-item expanded "><a href="../sequential/modfunc.html"><strong aria-hidden="true">4.2.</strong> Modules and Functions</a></li><li class="chapter-item expanded "><a href="../sequential/atoms.html"><strong aria-hidden="true">4.3.</strong> Atoms</a></li><li class="chapter-item expanded "><a href="../sequential/tuples.html"><strong aria-hidden="true">4.4.</strong> Tuples</a></li><li class="chapter-item expanded "><a href="../sequential/lists.html"><strong aria-hidden="true">4.5.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../sequential/propmaps.html"><strong aria-hidden="true">4.6.</strong> Property Lists and Maps</a></li><li class="chapter-item expanded "><a href="../sequential/stdlib.html"><strong aria-hidden="true">4.7.</strong> The Erlang Standard Library</a></li><li class="chapter-item expanded "><a href="../sequential/output.html"><strong aria-hidden="true">4.8.</strong> Writing Output to a Terminal</a></li><li class="chapter-item expanded "><a href="../sequential/example.html"><strong aria-hidden="true">4.9.</strong> Example: Converting Temperature</a></li><li class="chapter-item expanded "><a href="../sequential/matching.html"><strong aria-hidden="true">4.10.</strong> Matching, Guards and Scope of Variables</a></li><li class="chapter-item expanded "><a href="../sequential/morelists.html"><strong aria-hidden="true">4.11.</strong> More About Lists</a></li><li class="chapter-item expanded "><a href="../sequential/conds.html"><strong aria-hidden="true">4.12.</strong> Conditionals</a></li><li class="chapter-item expanded "><a href="../sequential/bifs.html"><strong aria-hidden="true">4.13.</strong> Built-in Functions</a></li><li class="chapter-item expanded "><a href="../sequential/hofs.html"><strong aria-hidden="true">4.14.</strong> Higher Order Functions</a></li></ol></li><li class="chapter-item expanded "><a href="../concurrent/index.html"><strong aria-hidden="true">5.</strong> Concurrent Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../concurrent/processes.html"><strong aria-hidden="true">5.1.</strong> Processes</a></li><li class="chapter-item expanded "><a href="../concurrent/msgpass.html"><strong aria-hidden="true">5.2.</strong> Message Passing</a></li><li class="chapter-item expanded "><a href="../concurrent/names.html"><strong aria-hidden="true">5.3.</strong> Registered Process Names</a></li><li class="chapter-item expanded "><a href="../concurrent/dist.html"><strong aria-hidden="true">5.4.</strong> Distributed Programming</a></li><li class="chapter-item expanded "><a href="../concurrent/example.html"><strong aria-hidden="true">5.5.</strong> Example: Messenger</a></li></ol></li><li class="chapter-item expanded "><a href="../robust/index.html"><strong aria-hidden="true">6.</strong> Robustness</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../robust/timeouts.html"><strong aria-hidden="true">6.1.</strong> Timeouts</a></li><li class="chapter-item expanded "><a href="../robust/errors.html"><strong aria-hidden="true">6.2.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../robust/example.html"><strong aria-hidden="true">6.3.</strong> Example: Robust Messenger</a></li></ol></li><li class="chapter-item expanded "><a href="../records/index.html"><strong aria-hidden="true">7.</strong> Records</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../records/mods.html"><strong aria-hidden="true">7.1.</strong> Modularising</a></li><li class="chapter-item expanded "><a href="../records/headers.html"><strong aria-hidden="true">7.2.</strong> Header Files</a></li><li class="chapter-item expanded "><a href="../records/records.html"><strong aria-hidden="true">7.3.</strong> Records</a></li></ol></li><li class="chapter-item expanded "><a href="../macros/index.html"><strong aria-hidden="true">8.</strong> Macros</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../macros/eval.html"><strong aria-hidden="true">8.1.</strong> Eval</a></li><li class="chapter-item expanded "><a href="../macros/macros.html"><strong aria-hidden="true">8.2.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../macros/backquote.html"><strong aria-hidden="true">8.3.</strong> The Backquote Macro</a></li></ol></li><li class="chapter-item expanded "><a href="../conclusion/index.html"><strong aria-hidden="true">9.</strong> Conclusion</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="../feedback.html">Feedback</a></li><li class="chapter-item expanded affix "><a href="../redirects/docs.html">LFE Documentation</a></li><li class="chapter-item expanded affix "><a href="../redirects/mdbook.html">Built with mdBook</a></li></ol>
+        </div>
+        <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+    </nav>
+
+    <div id="page-wrapper" class="page-wrapper">
+
+        <div class="page">
+            
+            <div id="menu-bar-hover-placeholder"></div>
+            <div id="menu-bar" class="menu-bar sticky bordered">
+                <div class="left-buttons">
+                    <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                        aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                        aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                        <i class="fa fa-paint-brush"></i>
+                    </button>
+                    <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="lfe-pdp">LFE PDP</button></li>
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="light">Light</button></li>
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="rust">Rust</button></li>
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="coal">Coal</button></li>
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="navy">Navy</button></li>
+                        <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button>
+                        </li>
+                    </ul>
+                    
+                    <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                        aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                        aria-controls="searchbar">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    
+                </div>
+
+                <h1 class="menu-title">The LFE Tutorial</h1>
+
+                <div class="right-buttons">
+                    <a href="../print.html" title="Print this book" aria-label="Print this book">
+                        <i id="print-button" class="fa fa-print"></i>
+                    </a>
+                    
+                    <a href="https://github.com/lfe/tutorial/" title="Git repository" aria-label="Git repository">
+                        <i id="git-repository-button" class="fa fa-github"></i>
+                    </a>
+                    
+                </div>
+            </div>
+
+            
+            <div id="search-wrapper" class="hidden">
+                <form id="searchbar-outer" class="searchbar-outer">
+                    <input type="search" name="search" id="searchbar" name="searchbar"
+                        placeholder="Search this book ..." aria-controls="searchresults-outer"
+                        aria-describedby="searchresults-header">
+                </form>
+                <div id="searchresults-outer" class="searchresults-outer hidden">
+                    <div id="searchresults-header" class="searchresults-header"></div>
+                    <ul id="searchresults">
+                    </ul>
+                </div>
+            </div>
+            
+
+            <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+            <script type="text/javascript">
+                document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                    link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                });
+            </script>
+
+            <div id="content" class="content">
+                <main>
+                    <h2><a class="header" href="#the-lfe-repl" id="the-lfe-repl">The LFE REPL</a></h2>
+<p>Most operating systems have a command interpreter or shell -- Unix and Linux have many, while Windows has the Command Prompt. Likewise, Erlang has a shell where you can directly write bits of Erlang code and evaluate (run) them to see what happens. LFE has more than a shell: it's a full REPL (<em>read-eval-print loop</em>) like other Lisps, and it can do more than the Erlang shell can (including defining proper functions and Lisp macros).</p>
+<h3><a class="header" href="#starting-the-lfe-repl" id="starting-the-lfe-repl">Starting the LFE REPL</a></h3>
+<p>In your system terminal window where you changed directory to the clone of the LFE repository, you can start the LFE REPL by typing the following:</p>
+<pre><code class="language-bash">./bin/lfe
+</code></pre>
+<p>At which point you will see output something like this:</p>
+<pre><code>Erlang/OTP 23 [erts-11.0.2] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-threads:1] [hipe] [dtrace]
+
+   ..-~.~_~---..
+  (      \\     )    |   A Lisp-2+ on the Erlang VM
+  |`-.._/_\\_.-':    |   Type (help) for usage info.
+  |         g |_ \   |
+  |        n    | |  |   Docs: http://docs.lfe.io/
+  |       a    / /   |   Source: http://github.com/rvirding/lfe
+   \     l    |_/    |
+    \   r     /      |   LFE v1.3-dev (abort with ^G)
+     `-E___.-'
+
+lfe&gt;
+</code></pre>
+<h3><a class="header" href="#interactive-lfe-code" id="interactive-lfe-code">Interactive LFE Code</a></h3>
+<p>Now let's multiply two numbers in the REPL by typing <code>(* 2 21)</code> at the <code>&gt; </code> prompt:</p>
+<pre><code class="language-lisp">lfe&gt; (* 2 21)
+</code></pre>
+<p>Lisp stands for &quot;LISt Processor&quot; because nearly everything in Lisp is reall just a list of things -- including the code itself. The lists in Lisps are created with parentheses, just like the expression above. As you can see, the multiplication operator goes first, followed by its arguments -- this is called <em>prefix notation</em>, due to the operator coming first.</p>
+<p>In order to tell the REPL that you want it to evaluate your LFE code, you need to his the <code>&lt;ENTER&gt;</code> or <code>&lt;RETURN&gt;</code> key.</p>
+<pre><code class="language-lisp">42
+lfe&gt;
+</code></pre>
+<p>It has correctly given you the answer: 42.</p>
+<p>Now let's try a more complex calculation:</p>
+<pre><code class="language-lisp">lfe&gt; (* 2 (+ 1 2 3 4 5 6))
+</code></pre>
+<p>This expression has one nested inside the other. The first one to be executed is the inner-most, in this case, the addition operation. Just like we saw before, the operator comes first (the &quot;addition&quot; operator, in this case) and then all of the numbers to be added.</p>
+<p>Hit <code>&lt;ENTER&gt;</code> to get your answer:</p>
+<pre><code class="language-lisp">42
+lfe&gt;
+</code></pre>
+<h3><a class="header" href="#defining-variables-and-functions" id="defining-variables-and-functions">Defining Variables and Functions</a></h3>
+<p>The LFE REPL allows you do set variables and define functions. Let's define a variable called <code>multiplier</code>:</p>
+<pre><code class="language-lisp">lfe&gt; (set multiplier 2)
+2
+lfe&gt;
+</code></pre>
+<p>When we set the value for that variable, the REPL provided feedback on the expression entered, showing us the value. Now we can use it just like the number for which it stands:</p>
+<pre><code class="language-lisp">lfe&gt; (* multiplier (+ 1 2 3 4 5 6))
+42
+lfe&gt;
+</code></pre>
+<p>The <code>set</code> form lets you define a variable; the <code>defun</code> form lets you define a function. Enter this in the REPL:</p>
+<pre><code class="language-lisp">lfe&gt; (defun double (x)
+    (* 2 x))
+</code></pre>
+<p>Now try it:</p>
+<pre><code class="language-lisp">lfe&gt; (double 21)
+42
+lfe&gt;
+</code></pre>
+<p>As we can see, this function multiplies any given number by <code>2</code>.</p>
+<h3><a class="header" href="#leaving-the-repl" id="leaving-the-repl">Leaving the REPL</a></h3>
+<p>To exit the REPL and shutdown the underlying Erlang system which started when you executed <code>./bin/lfe</code>, simply exit:</p>
+<pre><code class="language-lisp">lfe&gt; (exit)
+ok
+</code></pre>
+<p>At which point you will be presented with your regular system terminal prompt.</p>
+<p>There are two other ways in which you may leave the REPL:</p>
+<ul>
+<li>Hitting <code>^c</code> twice in a row, or</li>
+<li>Hitting <code>^g</code> then <code>q</code></li>
+</ul>
+
+                </main>
+
+                <nav class="nav-wrapper" aria-label="Page navigation">
+                    <!-- Mobile navigation buttons -->
+                    
+                    <a rel="prev" href="../sequential/index.html" class="mobile-nav-chapters previous"
+                        title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    
+
+                    
+                    <a rel="next" href="../sequential/modfunc.html" class="mobile-nav-chapters next"
+                        title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    
+
+                    <div style="clear: both"></div>
+                </nav>
+            </div>
+        </div>
+
+        <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            
+            <a rel="prev" href="../sequential/index.html" class="nav-chapters previous" title="Previous chapter"
+                aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <i class="fa fa-angle-left"></i>
+            </a>
+            
+
+            
+            <a rel="next" href="../sequential/modfunc.html" class="nav-chapters next" title="Next chapter"
+                aria-label="Next chapter" aria-keyshortcuts="Right">
+                <i class="fa fa-angle-right"></i>
+            </a>
+            
+        </nav>
+
+    </div>
+
+    
+
+    
+    <!-- Google Analytics Tag -->
+    <script type="text/javascript">
+        var localAddrs = ["localhost", "127.0.0.1", ""];
+
+        // make sure we don't activate google analytics if the developer is
+        // inspecting the book locally...
+        if (localAddrs.indexOf(document.location.hostname) === -1) {
+            (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-38274766-4', 'auto');
+            ga('send', 'pageview');
+        }
+    </script>
+    
+
+    
+
+    
+    <script type="text/javascript">
+        window.playground_copyable = true;
+    </script>
+    
+
+    
+
+    
+    <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+    
+
+    <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- Custom JS scripts -->
+    
+
+    
+
+</body>
+
+</html>

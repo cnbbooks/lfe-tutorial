@@ -1,0 +1,405 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js lfe-pdp">
+
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>Distributed Programming - The LFE Tutorial</title>
+    
+    
+
+
+    <!-- Custom HTML head -->
+    
+
+
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="Getting Started with LFE">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="../favicon.svg">
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/chrome.css">
+    <link rel="stylesheet" href="../css/print.css" media="print">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="../fonts/fonts.css">
+    
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="../highlight.css">
+    <link rel="stylesheet" href="../tomorrow-night.css">
+    <link rel="stylesheet" href="../ayu-highlight.css">
+
+    <!-- Custom theme stylesheets -->
+    
+    <link rel="stylesheet" href="../css/custom.css">
+    
+
+    
+</head>
+
+<body>
+    <!-- Provide site root to javascript -->
+    <script type="text/javascript">
+        var path_to_root = "../";
+        var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "lfe-pdp" : "lfe-pdp";
+    </script>
+
+    <!-- Work around some values being stored in localStorage wrapped in quotes -->
+    <script type="text/javascript">
+        try {
+            var theme = localStorage.getItem('mdbook-theme');
+            var sidebar = localStorage.getItem('mdbook-sidebar');
+
+            if (theme.startsWith('"') && theme.endsWith('"')) {
+                localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+            }
+
+            if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+            }
+        } catch (e) { }
+    </script>
+
+    <!-- Set the theme before any content is loaded, prevents flash -->
+    <script type="text/javascript">
+        var theme;
+        try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
+        if (theme === null || theme === undefined) { theme = default_theme; }
+        var html = document.querySelector('html');
+        html.classList.remove('no-js')
+        html.classList.remove('lfe-pdp')
+        html.classList.add(theme);
+        html.classList.add('js');
+    </script>
+
+    <!-- Hide / unhide sidebar before it is displayed -->
+    <script type="text/javascript">
+        var html = document.querySelector('html');
+        var sidebar = 'hidden';
+        if (document.body.clientWidth >= 1080) {
+            try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
+            sidebar = sidebar || 'visible';
+        }
+        html.classList.remove('sidebar-visible');
+        html.classList.add("sidebar-" + sidebar);
+    </script>
+
+    <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+        <div class="sidebar-scrollbox">
+            <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> The LFE Tutorial</a></li><li class="chapter-item expanded "><a href="../front/copyright-page.html"><strong aria-hidden="true">2.</strong> Copyright Page</a></li><li class="chapter-item expanded "><a href="../introduction/index.html"><strong aria-hidden="true">3.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../introduction/erlang.html"><strong aria-hidden="true">3.1.</strong> About Erlang</a></li><li class="chapter-item expanded "><a href="../introduction/lfe.html"><strong aria-hidden="true">3.2.</strong> About LFE</a></li><li class="chapter-item expanded "><a href="../introduction/deps.html"><strong aria-hidden="true">3.3.</strong> Dependencies</a></li><li class="chapter-item expanded "><a href="../introduction/install.html"><strong aria-hidden="true">3.4.</strong> Installing LFE</a></li></ol></li><li class="chapter-item expanded "><a href="../sequential/index.html"><strong aria-hidden="true">4.</strong> Sequential Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../sequential/repl.html"><strong aria-hidden="true">4.1.</strong> The REPL</a></li><li class="chapter-item expanded "><a href="../sequential/modfunc.html"><strong aria-hidden="true">4.2.</strong> Modules and Functions</a></li><li class="chapter-item expanded "><a href="../sequential/atoms.html"><strong aria-hidden="true">4.3.</strong> Atoms</a></li><li class="chapter-item expanded "><a href="../sequential/tuples.html"><strong aria-hidden="true">4.4.</strong> Tuples</a></li><li class="chapter-item expanded "><a href="../sequential/lists.html"><strong aria-hidden="true">4.5.</strong> Lists</a></li><li class="chapter-item expanded "><a href="../sequential/propmaps.html"><strong aria-hidden="true">4.6.</strong> Property Lists and Maps</a></li><li class="chapter-item expanded "><a href="../sequential/stdlib.html"><strong aria-hidden="true">4.7.</strong> The Erlang Standard Library</a></li><li class="chapter-item expanded "><a href="../sequential/output.html"><strong aria-hidden="true">4.8.</strong> Writing Output to a Terminal</a></li><li class="chapter-item expanded "><a href="../sequential/example.html"><strong aria-hidden="true">4.9.</strong> Example: Converting Temperature</a></li><li class="chapter-item expanded "><a href="../sequential/matching.html"><strong aria-hidden="true">4.10.</strong> Matching, Guards and Scope of Variables</a></li><li class="chapter-item expanded "><a href="../sequential/morelists.html"><strong aria-hidden="true">4.11.</strong> More About Lists</a></li><li class="chapter-item expanded "><a href="../sequential/conds.html"><strong aria-hidden="true">4.12.</strong> Conditionals</a></li><li class="chapter-item expanded "><a href="../sequential/bifs.html"><strong aria-hidden="true">4.13.</strong> Built-in Functions</a></li><li class="chapter-item expanded "><a href="../sequential/hofs.html"><strong aria-hidden="true">4.14.</strong> Higher Order Functions</a></li></ol></li><li class="chapter-item expanded "><a href="../concurrent/index.html"><strong aria-hidden="true">5.</strong> Concurrent Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../concurrent/processes.html"><strong aria-hidden="true">5.1.</strong> Processes</a></li><li class="chapter-item expanded "><a href="../concurrent/msgpass.html"><strong aria-hidden="true">5.2.</strong> Message Passing</a></li><li class="chapter-item expanded "><a href="../concurrent/names.html"><strong aria-hidden="true">5.3.</strong> Registered Process Names</a></li><li class="chapter-item expanded "><a href="../concurrent/dist.html" class="active"><strong aria-hidden="true">5.4.</strong> Distributed Programming</a></li><li class="chapter-item expanded "><a href="../concurrent/example.html"><strong aria-hidden="true">5.5.</strong> Example: Messenger</a></li></ol></li><li class="chapter-item expanded "><a href="../robust/index.html"><strong aria-hidden="true">6.</strong> Robustness</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../robust/timeouts.html"><strong aria-hidden="true">6.1.</strong> Timeouts</a></li><li class="chapter-item expanded "><a href="../robust/errors.html"><strong aria-hidden="true">6.2.</strong> Error Handling</a></li><li class="chapter-item expanded "><a href="../robust/example.html"><strong aria-hidden="true">6.3.</strong> Example: Robust Messenger</a></li></ol></li><li class="chapter-item expanded "><a href="../records/index.html"><strong aria-hidden="true">7.</strong> Records</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../records/mods.html"><strong aria-hidden="true">7.1.</strong> Modularising</a></li><li class="chapter-item expanded "><a href="../records/headers.html"><strong aria-hidden="true">7.2.</strong> Header Files</a></li><li class="chapter-item expanded "><a href="../records/records.html"><strong aria-hidden="true">7.3.</strong> Records</a></li></ol></li><li class="chapter-item expanded "><a href="../macros/index.html"><strong aria-hidden="true">8.</strong> Macros</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../macros/eval.html"><strong aria-hidden="true">8.1.</strong> Eval</a></li><li class="chapter-item expanded "><a href="../macros/macros.html"><strong aria-hidden="true">8.2.</strong> Macros</a></li><li class="chapter-item expanded "><a href="../macros/backquote.html"><strong aria-hidden="true">8.3.</strong> The Backquote Macro</a></li></ol></li><li class="chapter-item expanded "><a href="../conclusion/index.html"><strong aria-hidden="true">9.</strong> Conclusion</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="../feedback.html">Feedback</a></li><li class="chapter-item expanded affix "><a href="../redirects/docs.html">LFE Documentation</a></li><li class="chapter-item expanded affix "><a href="../redirects/mdbook.html">Built with mdBook</a></li></ol>
+        </div>
+        <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+    </nav>
+
+    <div id="page-wrapper" class="page-wrapper">
+
+        <div class="page">
+            
+            <div id="menu-bar-hover-placeholder"></div>
+            <div id="menu-bar" class="menu-bar sticky bordered">
+                <div class="left-buttons">
+                    <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+                        aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                        aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                        <i class="fa fa-paint-brush"></i>
+                    </button>
+                    <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="lfe-pdp">LFE PDP</button></li>
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="light">Light</button></li>
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="rust">Rust</button></li>
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="coal">Coal</button></li>
+                        <li role="none"><button role="menuitem" class="theme"
+                                id="navy">Navy</button></li>
+                        <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button>
+                        </li>
+                    </ul>
+                    
+                    <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                        aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                        aria-controls="searchbar">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    
+                </div>
+
+                <h1 class="menu-title">The LFE Tutorial</h1>
+
+                <div class="right-buttons">
+                    <a href="../print.html" title="Print this book" aria-label="Print this book">
+                        <i id="print-button" class="fa fa-print"></i>
+                    </a>
+                    
+                    <a href="https://github.com/lfe/tutorial/" title="Git repository" aria-label="Git repository">
+                        <i id="git-repository-button" class="fa fa-github"></i>
+                    </a>
+                    
+                </div>
+            </div>
+
+            
+            <div id="search-wrapper" class="hidden">
+                <form id="searchbar-outer" class="searchbar-outer">
+                    <input type="search" name="search" id="searchbar" name="searchbar"
+                        placeholder="Search this book ..." aria-controls="searchresults-outer"
+                        aria-describedby="searchresults-header">
+                </form>
+                <div id="searchresults-outer" class="searchresults-outer hidden">
+                    <div id="searchresults-header" class="searchresults-header"></div>
+                    <ul id="searchresults">
+                    </ul>
+                </div>
+            </div>
+            
+
+            <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+            <script type="text/javascript">
+                document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+                    link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                });
+            </script>
+
+            <div id="content" class="content">
+                <main>
+                    <h2><a class="header" href="#distributed-programming" id="distributed-programming">Distributed Programming</a></h2>
+<p>Now let's re-write the ping pong program with &quot;ping&quot; and &quot;pong&quot; on different computers. Before we do this, there are a few things we need to set up to get this to work. The distributed LFE/Erlang implementation provides a basic security mechanism to prevent unauthorized access to an Erlang system on another computer (<em>manual</em>). Erlang systems which talk to each other must have the same <em>magic cookie</em>. The easiest way to achieve this is by having a file called <code>.erlang.cookie</code> in your home directory on all machines which on which you are going to run Erlang systems communicating with each other (on Windows systems the home directory is the directory where pointed to by the $HOME environment variable - you may need to set this. On Linux or Unix you can safely ignore this and simply create a file called <code>.erlang.cookie</code> in the directory you get to after executing the command <code>cd</code> without any argument). The <code>.erlang.cookie</code> files should contain one line with the same atom. For example on Linux or Unix in the OS shell:</p>
+<pre><code>cd
+cat &gt; .erlang.cookie
+</code></pre>
+<p>Which shows this:</p>
+<pre><code>this_is_very_secret
+</code></pre>
+<p>Let's make it accessible only by the owner of the file:</p>
+<pre><code>chmod 400 .erlang.cookie
+</code></pre>
+<p>Note that this permission change is a requirement.</p>
+<p>When you start an LFE/Erlang system which is going to talk to other LFE/Erlang systems, you must give it a name, eg:</p>
+<pre><code>lfe -sname my-name
+</code></pre>
+<p>We will see more details of this later (<em>manual</em>). If you want to experiment with distributed Erlang, but you only have one computer to work on, you can start two separate Erlang systems on the same computer but give them different names. Each Erlang system running on a computer is called an Erlang node.</p>
+<p>(Note: <code>erl -sname</code> assumes that all nodes are in the same IP domain and we can use only the first component of the IP address, if we want to use nodes in different domains we use <code>-name</code> instead, but then all IP address must be given in full (<em>manual</em>).</p>
+<p>Here is the ping pong example modified to run on two separate nodes:</p>
+<pre><code class="language-lisp">(defmodule tut21
+  (export (start-ping 1) (start-pong 0) (ping 2) (pong 0)))
+
+(defun ping
+  ((0 pong-node)
+   (! (tuple 'pong pong-node) 'finished)
+   (lfe_io:format &quot;Ping finished~n&quot; ()))
+  ((n pong-node)
+   (! (tuple 'pong pong-node) (tuple 'ping (self)))
+   (receive
+     ('pong (lfe_io:format &quot;Ping received pong~n&quot; ())))
+   (ping (- n 1) pong-node)))
+
+(defun pong ()
+  (receive
+    ('finished
+     (lfe_io:format &quot;Pong finished~n&quot; ()))
+    ((tuple 'ping ping-pid)
+     (lfe_io:format &quot;Pong received ping~n&quot; ())
+     (! ping-pid 'pong)
+     (pong))))
+
+(defun start-pong ()
+  (register 'pong (spawn 'tut21 'pong ())))
+
+(defun start-ping (pong-node)
+  (spawn 'tut21 'ping (list 3 pong-node)))
+</code></pre>
+<p>Let us assume we have two computers called gollum and kosken. We will start a node on kosken called ping and then a node on gollum called pong.</p>
+<p>On kosken (on a Linux/Unix system):</p>
+<pre><code class="language-shell">lfe -sname ping
+</code></pre>
+<pre><code>Erlang/OTP 17 [erts-6.0] [source-07b8f44] [64-bit] [smp:8:8] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
+
+LFE Shell V6.0 (abort with ^G)
+(ping@kosken)lfe&gt;
+</code></pre>
+<p>On gollum:</p>
+<pre><code class="language-shell">lfe -sname pong
+</code></pre>
+<pre><code>Erlang/OTP 17 [erts-6.0] [source-07b8f44] [64-bit] [smp:8:8] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
+
+LFE Shell V6.0 (abort with ^G)
+(pong@gollum)lfe&gt;
+</code></pre>
+<p>Now start the &quot;pong&quot; process on gollum:</p>
+<pre><code class="language-lisp">(pong@gollum)lfe&gt; (tut21:start-pong)
+true
+</code></pre>
+<p>and start the &quot;ping&quot; process on kosken (from the code above you will see that a parameter of the <code>start-ping</code> function is the node name of the Erlang system where &quot;pong&quot; is running):</p>
+<pre><code class="language-lisp">(ping@kosken)lfe&gt; (tut21:start-ping 'pong@gollum)
+&lt;0.41.0&gt;
+(ping@kosken)lfe&gt; Ping received pong
+Ping received pong
+Ping received pong
+Ping finished
+</code></pre>
+<p>Here we see that the ping pong program has run, on the &quot;pong&quot; side we see:</p>
+<pre><code class="language-lisp">(pong@gollum)lfe&gt;
+Pong received ping
+Pong received ping
+Pong received ping
+Pong finished
+</code></pre>
+<p>Looking at the <code>tut21</code> code we see that the <code>pong</code> function itself is unchanged, the lines:</p>
+<pre><code class="language-lisp">    ((tuple 'ping ping-pid)
+     (lfe_io:format &quot;Pong received ping~n&quot; ())
+     (! ping-pid 'pong)
+</code></pre>
+<p>work in the same way irrespective of on which node the &quot;ping&quot; process is executing. Thus Erlang pids contain information about where the process executes so if you know the pid of a process, the &quot;!&quot; operator can be used to send it a message if the process is on the same node or on a different node.</p>
+<p>A difference is how we send messages to a registered process on another node:</p>
+<pre><code class="language-lisp">   (! (tuple 'pong pong-node) (tuple 'ping (self)))
+</code></pre>
+<p>We use a tuple <code>#(registered-name node-name)</code> instead of just the <code>registered-name</code>.</p>
+<p>In the previous example, we started &quot;ping&quot; and &quot;pong&quot; from the shells of two separate Erlang nodes. <code>spawn</code> can also be used to start processes in other nodes. The next example is the ping pong program, yet again, but this time we will start &quot;ping&quot; in another node:</p>
+<pre><code class="language-lisp">(defmodule tut22
+  (export (start 1) (ping 2) (pong 0)))
+
+(defun ping
+  ((0 pong-node)
+   (! (tuple 'pong pong-node) 'finished)
+   (lfe_io:format &quot;Ping finished~n&quot; ()))
+  ((n pong-node)
+   (! (tuple 'pong pong-node) (tuple 'ping (self)))
+   (receive
+     ('pong (lfe_io:format &quot;Ping received pong~n&quot; ())))
+   (ping (- n 1) pong-node)))
+
+(defun pong ()
+  (receive
+    ('finished
+     (lfe_io:format &quot;Pong finished~n&quot; ()))
+    ((tuple 'ping ping-pid)
+     (lfe_io:format &quot;Pong received ping~n&quot; ())
+     (! ping-pid 'pong)
+     (pong))))
+
+(defun start (ping-node)
+  (register 'pong (spawn 'tut22 'pong ()))
+  (spawn ping-node 'tut22 'ping (list 3 (node))))
+</code></pre>
+<p>The function <code>node/0</code> returns the name of the current node.</p>
+<p>Assuming an LFE system called <code>ping</code> (but not the &quot;ping&quot; process) has already been started on kosken, then on gollum we do:</p>
+<pre><code class="language-lisp">(pong@gollum)lfe&gt; (tut22:start 'ping@kosken)
+&lt;8524.50.0&gt;
+(pong@gollum)lfe&gt; Pong received ping
+Ping received pong
+Pong received ping
+Ping received pong
+Pong received ping
+Ping received pong
+Ping finished
+Pong finished
+</code></pre>
+<p>Notice we get all the output on gollum. This is because the io system finds out where the process is spawned from and sends all output there.</p>
+<p>Although we do not show here there are no problems with running nodes distributed nodes where some run Erlang and some run LFE. The handling of io will also work the same across mixed LFE and Erlang nodes.</p>
+
+                </main>
+
+                <nav class="nav-wrapper" aria-label="Page navigation">
+                    <!-- Mobile navigation buttons -->
+                    
+                    <a rel="prev" href="../concurrent/names.html" class="mobile-nav-chapters previous"
+                        title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    
+
+                    
+                    <a rel="next" href="../concurrent/example.html" class="mobile-nav-chapters next"
+                        title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    
+
+                    <div style="clear: both"></div>
+                </nav>
+            </div>
+        </div>
+
+        <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            
+            <a rel="prev" href="../concurrent/names.html" class="nav-chapters previous" title="Previous chapter"
+                aria-label="Previous chapter" aria-keyshortcuts="Left">
+                <i class="fa fa-angle-left"></i>
+            </a>
+            
+
+            
+            <a rel="next" href="../concurrent/example.html" class="nav-chapters next" title="Next chapter"
+                aria-label="Next chapter" aria-keyshortcuts="Right">
+                <i class="fa fa-angle-right"></i>
+            </a>
+            
+        </nav>
+
+    </div>
+
+    
+
+    
+    <!-- Google Analytics Tag -->
+    <script type="text/javascript">
+        var localAddrs = ["localhost", "127.0.0.1", ""];
+
+        // make sure we don't activate google analytics if the developer is
+        // inspecting the book locally...
+        if (localAddrs.indexOf(document.location.hostname) === -1) {
+            (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-38274766-4', 'auto');
+            ga('send', 'pageview');
+        }
+    </script>
+    
+
+    
+
+    
+    <script type="text/javascript">
+        window.playground_copyable = true;
+    </script>
+    
+
+    
+
+    
+    <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+    
+
+    <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- Custom JS scripts -->
+    
+
+    
+
+</body>
+
+</html>
