@@ -2,7 +2,7 @@
 
 [forthcoming]
 
-### Refactor Temperature Convertion Example
+### Refactor Temperature Conversion Example
 
 [tutorial #16]
 

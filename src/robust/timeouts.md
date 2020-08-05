@@ -68,7 +68,7 @@ The timeout is set in:
       (lfe_io:format "Pong timed out~n" ()))))
 ```
 
-We start the timeout ``(after 5000)`` when we enter ``receive``. The timeout is canceled if ``#(ping ping-pid)`` is received. If ``#(ping ping-pid)`` is not received, the actions following the timeout will be done after 5000 milliseconds. ``after`` must be last in the ``receive``, i.e. preceded by all other message reception specifications in the ``receive``. Of course we could also call a function which returned an integer for the timeout:
+We start the timeout ``(after 5000)`` when we enter ``receive``. The timeout is cancelled if ``#(ping ping-pid)`` is received. If ``#(ping ping-pid)`` is not received, the actions following the timeout will be done after 5000 milliseconds. ``after`` must be last in the ``receive``, i.e. preceded by all other message reception specifications in the ``receive``. Of course we could also call a function which returned an integer for the timeout:
 
 ```lisp
 (after (pong-timeout)

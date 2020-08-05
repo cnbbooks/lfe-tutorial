@@ -19,7 +19,7 @@ lfe> (set options '(#(debug true) #(default 42)))
 (#(debug true) #(default 42))
 ```
 
-There are convenience functions provided in the ``proplists`` module. In the last example, we define a default value to be used in the event that the given key is not found in the proplist:
+There are convenience functions provided in the `proplists` module. In the last example, we define a default value to be used in the event that the given key is not found in the proplist:
 
 ```lisp
 lfe> (proplists:get_value 'default options)
@@ -46,7 +46,7 @@ Be sure to read the [module documentation](http://www.erlang.org/doc/man/proplis
         (/ a b))))
 ```
 
-Let's try our funtion without and then with various options:
+Let's try our function without and then with various options:
 
 ```lisp
 lfe> (div 1 2)
@@ -60,7 +60,7 @@ Returning as ratio ...
 
 ### Maps
 
-As with property lists, maps are a set of key to value associations. You may create an association from "key" to value 42 in one of two ways: using the LFE core form ``map`` or entering a map literal:
+As with property lists, maps are a set of key to value associations. You may create an association from "key" to value 42 in one of two ways: using the LFE core form `map` or entering a map literal:
 
 ```lisp
 lfe> (map "key" 42)
@@ -69,7 +69,7 @@ lfe> #M("key" 42)
 #M("key" 42)
 ```
 
-We will jump straight into the deep end with an example using some interesting features. The following example shows how we calculate alpha blending using maps to reference color and alpha channels. Save this code as the file ``color.lfe`` in the directory from which you have run the LFE REPL:
+We will jump straight into the deep end with an example using some interesting features. The following example shows how we calculate alpha blending using maps to reference colour and alpha channels. Save this code as the file `colour.lfe` in the directory from which you have run the LFE REPL:
 
 ```lisp
 (defmodule tut7
@@ -129,19 +129,19 @@ Now let's try it out, first compiling it:
 ```lisp
 lfe> (c "tut7.lfe")
 #(module tut7)
-lfe> (set color-1 (tut7:new 0.3 0.4 0.5 1.0))
+lfe> (set colour-1 (tut7:new 0.3 0.4 0.5 1.0))
 #M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
-lfe> (set color-2 (tut7:new 1.0 0.8 0.1 0.3))
+lfe> (set colour-2 (tut7:new 1.0 0.8 0.1 0.3))
 #M(alpha 0.3 blue 0.1 green 0.8 red 1.0)
-lfe> (tut7:blend color-1 color-2)
+lfe> (tut7:blend colour-1 colour-2)
 #M(alpha 1.0 blue 0.5 green 0.4 red 0.3)
-lfe> (tut7:blend color-2 color-1)
+lfe> (tut7:blend colour-2 colour-1)
 #M(alpha 1.0 blue 0.38 green 0.52 red 0.51)
 ```
 
 This example warrants some explanation.
 
-First we define a couple macros to help with our guard tests. This is only here for convenience and to reduce syntax cluttering. Guards can be only composed of a limited set of functions, so we needed to use macros that would compile down to just the funtions allowed in guards. A full treatment of Lisp macros is beyond the scope of this tutorial, but there is a lot of good material available online for learning macros, including Paul Graham's book "On Lisp."
+First we define a couple macros to help with our guard tests. This is only here for convenience and to reduce syntax cluttering. Guards can be only composed of a limited set of functions, so we needed to use macros that would compile down to just the functions allowed in guards. A full treatment of Lisp macros is beyond the scope of this tutorial, but there is a lot of good material available online for learning macros, including Paul Graham's book "On Lisp."
 
 ```lisp
 (defun new
@@ -149,11 +149,11 @@ First we define a couple macros to help with our guard tests. This is only here 
    (map 'red r 'green g 'blue b 'alpha a)))
 ```
 
-The function ``new/4`` [^1] creates a new map term with and lets the keys ``red``, ``green``, ``blue`` and ``alpha`` be associated with an initial value. In this case we only allow for float values between and including 0.0 and 1.0 as ensured by the ``all-channels?`` and ``channel?`` macros.
+The function `new/4` [^1] creates a new map term with and lets the keys `red`, `green`, `blue` and `alpha` be associated with an initial value. In this case we only allow for float values between and including 0.0 and 1.0 as ensured by the `all-channels?` and `channel?` macros.
 
-By calling ``blend/2`` on any color term created by ``new/4`` we can calculate the resulting color as determined by the two maps terms.
+By calling `blend/2` on any colour term created by `new/4` we can calculate the resulting colour as determined by the two maps terms.
 
-The first thing ``blend/2`` does is to calculate the resulting alpha channel.
+The first thing `blend/2` does is to calculate the resulting alpha channel.
 
 ```lisp
 (defun alpha
@@ -161,9 +161,9 @@ The first thing ``blend/2`` does is to calculate the resulting alpha channel.
    (+ src-alpha (* dst-alpha (- 1.0 src-alpha)))))
 ```
 
-We fetch the value associated with key ``alpha`` for both arguments using the ``(map 'alpha <var>)`` pattern. Any other keys in the map are ignored, only the key ``alpha`` is required and checked for.
+We fetch the value associated with key `alpha` for both arguments using the `(map 'alpha <var>)` pattern. Any other keys in the map are ignored, only the key `alpha` is required and checked for.
 
-This is also the case for functions ``red/2``, ``blue/2`` and ``green/2``.
+This is also the case for functions `red/2`, `blue/2` and `green/2`.
 
 ```lisp
 (defun red
@@ -175,7 +175,7 @@ This is also the case for functions ``red/2``, ``blue/2`` and ``green/2``.
 
 The difference here is that we check for two keys in each map argument. The other keys are ignored.
 
-Finally we return the resulting color in ``blend/3``.
+Finally we return the resulting colour in `blend/3`.
 
 ```lisp
 (defun blend
@@ -187,7 +187,7 @@ Finally we return the resulting color in ``blend/3``.
                'alpha alpha))
 ```
 
-We update the ``dst`` map with new channel values. The syntax for updating an existing key with a new value is done with ``map-update`` form.
+We update the `dst` map with new channel values. The syntax for updating an existing key with a new value is done with `map-update` form.
 
 ----
 

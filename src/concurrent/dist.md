@@ -1,6 +1,6 @@
 ## Distributed Programming
 
-Now let's re-write the ping pong program with "ping" and "pong" on different computers. Before we do this, there are a few things we need to set up to get this to work. The distributed LFE/Erlang implementation provides a basic security mechanism to prevent unauthorized access to an Erlang system on another computer (*manual*). Erlang systems which talk to each other must have the same *magic cookie*. The easiest way to achieve this is by having a file called ``.erlang.cookie`` in your home directory on all machines which on which you are going to run Erlang systems communicating with each other (on Windows systems the home directory is the directory where pointed to by the $HOME environment variable - you may need to set this. On Linux or Unix you can safely ignore this and simply create a file called ``.erlang.cookie`` in the directory you get to after executing the command ``cd`` without any argument). The ``.erlang.cookie`` files should contain one line with the same atom. For example on Linux or Unix in the OS shell:
+Now let's re-write the ping pong program with "ping" and "pong" on different computers. Before we do this, there are a few things we need to set up to get this to work. The distributed LFE/Erlang implementation provides a basic security mechanism to prevent unauthorised access to an Erlang system on another computer (*manual*). Erlang systems which talk to each other must have the same *magic cookie*. The easiest way to achieve this is by having a file called ``.erlang.cookie`` in your home directory on all machines which on which you are going to run Erlang systems communicating with each other (on Windows systems the home directory is the directory where pointed to by the $HOME environment variable - you may need to set this. On Linux or Unix you can safely ignore this and simply create a file called ``.erlang.cookie`` in the directory you get to after executing the command ``cd`` without any argument). The ``.erlang.cookie`` files should contain one line with the same atom. For example on Linux or Unix in the OS shell:
 
 ```
 cd
@@ -17,7 +17,7 @@ chmod 400 .erlang.cookie
 
 Note that this permission change is a requirement.
 
-When you start an LFE/Erlang system which is going to talk to other LFE/Erlang systems, you must give it a name, eg:
+When you start an LFE/Erlang system which is going to talk to other LFE/Erlang systems, you must give it a name, e.g.:
 
 ```
 lfe -sname my-name
@@ -78,6 +78,7 @@ On gollum:
 ```shell
 lfe -sname pong
 ```
+
 ```
 Erlang/OTP 17 [erts-6.0] [source-07b8f44] [64-bit] [smp:8:8] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
 

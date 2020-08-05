@@ -7,7 +7,7 @@ Erlang](http://www.erlang.org/doc/getting_started/intro.html)
 ## Introduction
 
 The members of the LFE community are
-[working torward](https://github.com/lfe/docs/issues/40)
+[working toward](https://github.com/lfe/docs/issues/40)
 a more comprehensive LFE tutorial, but we wanted to
 [get something out](https://github.com/lfe/docs/issues/42)
 sooner rather than later, so we're starting with this. On the positive side,

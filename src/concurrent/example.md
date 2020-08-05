@@ -12,7 +12,7 @@ Before we start, let's note the following:
 
 We will set up the messenger by allowing "clients" to connect to a central server and say who and where they are. I.e. a user won't need to know the name of the Erlang node where another user is located to send a message.
 
-File ``messenger.lfe``:
+File `messenger.lfe`:
 
 ```lisp
 ;;; Message passing utility.
@@ -186,7 +186,7 @@ File ``messenger.lfe``:
 To use this program you need to:
 
 - configure the server_node() function
-- copy the compiled code (``messenger.beam``) to the directory on each computer where you start Erlang.
+- copy the compiled code (`essenger.beam` to the directory on each computer where you start Erlang.
 
 In the following example of use of this program, I have started nodes on four different computers, but if you don't have that many machines available on your network, you could start up several nodes on the same machine.
 
@@ -254,11 +254,11 @@ But this fails as Fred has already logged off.
 
 First let's look at some of the new concepts we have introduced.
 
-There are two versions of the ``server-transfer`` function, one with four arguments (``server-transfer/4``) and one with five (``server_transfer/5``). These are regarded by LFE as two separate functions.
+There are two versions of the `server-transfer` function, one with four arguments (`server-transfer/4`) and one with five (`server_transfer/5`). These are regarded by LFE as two separate functions.
 
-Note how we write the ``server`` function so that it calls itself, ``(server user-list)`` and thus creates a loop. The ErlangLFE compiler is "clever" and optimizes the code so that this really is a sort of loop and not a proper function call. But this only works if there is no code after the call, otherwise the compiler will expect the call to return and make a proper function call. This would result in the process getting bigger and bigger for every loop.
+Note how we write the `server` function so that it calls itself, `(server user-list)` and thus creates a loop. The Erlang-LFE compiler is "clever" and optimises the code so that this really is a sort of loop and not a proper function call. But this only works if there is no code after the call, otherwise the compiler will expect the call to return and make a proper function call. This would result in the process getting bigger and bigger for every loop.
 
-We use functions in the ``lists`` module. This is a very useful module and a study of the manual page is recommended (erl -man lists). ``(lists:keymember key position lists)`` looks through a list of tuples and looks at ``position`` in each tuple to see if it is the same as ``key``. The first element is position 1. If it finds a tuple where the element at ``position`` is the same as ``key``, it returns ``true``, otherwise ``false``.
+We use functions in the `lists` module. This is a very useful module and a study of the manual page is recommended (erl -man lists). `(lists:keymember key position lists)` looks through a list of tuples and looks at `position` in each tuple to see if it is the same as `key`. The first element is position 1. If it finds a tuple where the element at `position` is the same as `key`, it returns `true`, otherwise `false`.
 
 ```lisp
 > (lists:keymember 'a 2 '(#(x y z) #(b b b) #(b a c) #(q r s)))
@@ -267,14 +267,14 @@ true
 false
 ```
 
-``lists:keydelete`` works in the same way but deletes the first tuple found (if any) and returns the remaining list:
+`lists:keydelete` works in the same way but deletes the first tuple found (if any) and returns the remaining list:
 
 ```lisp
 > (lists:keymember 'a 2 '(#(x y z) #(b b b) #(b a c) #(q r s)))
 (#(x y z) #(b b b) #(q r s))
 ```
 
-``lists:keyfind`` is like ``lists:keymember``, but it returns the tuple found or the atom ``false``:
+`lists:keyfind` is like `lists:keymember`, but it returns the tuple found or the atom `false`:
 
 ```lisp
 > (lists:keyfind 'a 2 '(#(x y z) #(b b b) #(b a c) #(q r s)))
@@ -283,13 +283,13 @@ false
 false
 ```
 
-There are a lot more very useful functions in the ``lists`` module.
+There are a lot more very useful functions in the `lists` module.
 
-An LFE process will (conceptually) run until it does a ``receive`` and there is no message which it wants to receive in the message queue. I say "conceptually" because the LFE system shares the CPU time between the active processes in the system.
+An LFE process will (conceptually) run until it does a `receive` and there is no message which it wants to receive in the message queue. I say "conceptually" because the LFE system shares the CPU time between the active processes in the system.
 
-A process terminates when there is nothing more for it to do, i.e. the last function it calls simply returns and doesn't call another function. Another way for a process to terminate is for it to call ``exit/1``. The argument to ``exit/1`` has a special meaning which we will look at later. In this example we will do ``(exit 'normal)`` which has the same effect as a process running out of functions to call.
+A process terminates when there is nothing more for it to do, i.e. the last function it calls simply returns and doesn't call another function. Another way for a process to terminate is for it to call `exit/1`. The argument to `exit/1` has a special meaning which we will look at later. In this example we will do `(exit 'normal)` which has the same effect as a process running out of functions to call.
 
-The BIF ``(whereis registered-name)`` checks if a registered process of name ``registered-name`` exists and return the pid of the process if it does exist or the atom ``undefined`` if it does not.
+The BIF `(whereis registered-name)` checks if a registered process of name `registered-name` exists and return the pid of the process if it does exist or the atom `undefined` if it does not.
 
 You should by now be able to understand most of the code above so I'll just go through one case: a message is sent from one user to another.
 
@@ -305,7 +305,7 @@ After testing that the client process exists:
 (whereis 'mess-client)
 ```
 
-and a message is sent to ``mess-client``:
+and a message is sent to `mess-client`:
 
 ```lisp
 (! 'mess-client #(message-to fred "hello"))
@@ -325,37 +325,37 @@ The server receives this message and calls:
 (server-transfer from 'fred "hello" user-list)
 ```
 
-which checks that the pid ``from`` is in the ``user-list``:
+which checks that the pid `from` is in the `user-list`:
 
 ```lisp
 (lists:keyfind from 1 user-list)
 ```
 
-If ``keyfind`` returns the atom ``false``, some sort of error has occurred and the server sends back the message:
+If `keyfind` returns the atom `false`, some sort of error has occurred and the server sends back the message:
 
 ```lisp
 (! from-pid #(messenger stop you-are-not-logged-on))
 ```
 
-which is received by the client which in turn does ``(exit 'normal)`` and terminates. If ``keyfind`` returns ``(tuple from name)`` we know that the user is logged on and is his name (peter) is in variable ``name``. We now call:
+which is received by the client which in turn does `(exit 'normal)` and terminates. If `keyfind` returns `(tuple from name)` we know that the user is logged on and is his name (`peter`) is in variable `name`. We now call:
 
 ```lisp
 (server-transfer from 'peter 'fred "hello" user-list)
 ```
 
-Note that as this is ``server-transfer/5`` it is not the same as the previous function ``server_transfer/4``. We do another ``keyfind`` on ``user-list`` to find the pid of the client corresponding to fred:
+Note that as this is `server-transfer/5` it is not the same as the previous function `server_transfer/4`. We do another `keyfind` on `user-list` to find the pid of the client corresponding to `fred`:
 
 ```lisp
 (lists:keyfind 'fred 2 user-list)
 ```
 
-This time we use argument 2 which is the second element in the tuple. If this returns the atom ``false`` we know that fred is not logged on and we send the message:
+This time we use argument 2 which is the second element in the tuple. If this returns the atom `false` we know that fred is not logged on and we send the message:
 
 ```lisp
 (! from-pid #(messenger receiver-not-found)
 ```
 
-which is received by the client, if ``keyfind`` returns:
+which is received by the client, if `keyfind` returns:
 
 ```lisp
 (tuple to-pid 'fred)
@@ -367,7 +367,7 @@ we send the message:
 (! to-pid #(message-from peter "hello"))
 ```
 
-to fred's client and the message:
+to Fred's client and the message:
 
 ```lisp
 (! from-pid #(messenger sent))
@@ -382,4 +382,4 @@ Fred's client receives the message and prints it:
  (lfe_io:format "Message from ~p: ~p~n" (list from-name message))))
 ```
 
-and peter's client receives the message in the ``await-result`` function.
+and Peter's client receives the message in the `await-result` function.

@@ -1,14 +1,14 @@
 ## Conditionals
 
-In the module ``tut13.lfe``, we saw our first conditional, the ``(if ...)`` form. We're going to spend the rest of this section discussing ``if``, ``cond``, ``case``, as well as the use of guards and pattern matching to form conditional code branches.
+In the module `tut13.lfe`, we saw our first conditional, the `(if ...)` form. We're going to spend the rest of this section discussing `if`, `cond`, `case`, as well as the use of guards and pattern matching to form conditional code branches.
 
-### The ``if`` Form
+### The `if` Form
 
-In the previous section, we wrote the function ``find-max-min/3`` to work out the maximum and minimum temperature. This work was delegated to two helper functions:
- * ``compare-max/2``
- * ``compare-min/2``
+In the previous section, we wrote the function `find-max-min/3` to work out the maximum and minimum temperature. This work was delegated to two helper functions:
+ * `compare-max/2`
+ * `compare-min/2`
 
-In both of those functions, we introduced the new ``if`` form. If works as follows:
+In both of those functions, we introduced the new `if` form. If works as follows:
 
 ```lisp
 (if <predicate>
@@ -16,7 +16,7 @@ In both of those functions, we introduced the new ``if`` form. If works as follo
   <expression2>)
 ```
 
-where ``<expression1>`` is executed if ``<predicate>`` evaluates to ``true`` and ``<expression2>`` is executed if ``<predicate>`` evaluates to ``false``. If you have used other programming languages, then this will be quite familiar to you. If you have not, if should remind you a bit of the logic we looked at when discussing guards.
+where `<expression1>` is executed if `<predicate>` evaluates to `true` and `<expression2>` is executed if `<predicate>` evaluates to `false`. If you have used other programming languages, then this will be quite familiar to you. If you have not, if should remind you a bit of the logic we looked at when discussing guards.
 
 We can see it in action with the following LFE session in the REPL:
 
@@ -34,11 +34,11 @@ Or -- you will be more familiar with this -- our code from the last section:
   city1
   city2)
 ```
-where, if ``temp1`` is less than ``temp2``, the value stored in ``city1`` is returned.
+where, if `temp1` is less than `temp2`, the value stored in `city1` is returned.
 
-So the ``if`` form works for two conditions. What about 3? 10? 100? Well, for the situations were we want to check multiple conditions, we'll need the ``cond`` form.
+So the `if` form works for two conditions. What about 3? 10? 100? Well, for the situations were we want to check multiple conditions, we'll need the `cond` form.
 
-### The ``cond`` Form
+### The `cond` Form
 
 ```lisp
 (cond (<predicate1> <expression1>)
@@ -48,14 +48,14 @@ So the ``if`` form works for two conditions. What about 3? 10? 100? Well, for th
       (<predicaten> <expressionn>))
 ```
 
-A given expression is only executed if its accompanying predicate evaluates to ``true``. The ``cond`` returns the value of the expression for the first predicate that evaluates to ``true``. Using ``cond``, our temperature test would look like this:
+A given expression is only executed if its accompanying predicate evaluates to `true`. The `cond` returns the value of the expression for the first predicate that evaluates to `true`. Using `cond`, our temperature test would look like this:
 
 ```lisp
 (cond ((< temp1 temp2) city1)
       ((>= temp1 temp2) city2))
 ```
 
-Here's an example which takes advantage of ``cond`` supporting more than two logic branches:
+Here's an example which takes advantage of `cond` supporting more than two logic branches:
 
 ```lisp
 (cond ((> x 0) x)
@@ -63,9 +63,9 @@ Here's an example which takes advantage of ``cond`` supporting more than two log
       ((< x 0) (- x)))
 ```
 
-Note that each predicate is an expression with it's own parentheses around it; on its left is the opening parenthenis for that particular branch of the ``cond``.
+Note that each predicate is an expression with it's own parentheses around it; on its left is the opening parenthesis for that particular branch of the `cond`.
 
-Often times when using ``cond`` one needs a "default" or "fall-through" option to be used when no other condition is met. Since it's the last one, and we need it to evaluate to ``true`` we simply set the last condition to ``true`` when we need a default. Here's a rather silly example:
+Often times when using `cond` one needs a "default" or "fall-through" option to be used when no other condition is met. Since it's the last one, and we need it to evaluate to `true` we simply set the last condition to `true` when we need a default. Here's a rather silly example:
 
 ```lisp
 (cond ((lists:member x '(1 2 3)) "First three")
@@ -76,11 +76,11 @@ Often times when using ``cond`` one needs a "default" or "fall-through" option t
 
 Any number that is negative will be caught by the last condition.
 
-In case you're wondering, yes: ``cond`` works with patterns as well. Let's take a look.
+In case you're wondering, yes: `cond` works with patterns as well. Let's take a look.
 
-### The Extended ``cond`` Form
+### The Extended `cond` Form
 
-When we talked about ``cond`` above, we only discussed the form as any Lisper would be familiar. However, LFE has extended ``cond`` with additional capabilities provided via pattern matching. LFE's ``cond`` has the following general form when this is taken into consideration:
+When we talked about `cond` above, we only discussed the form as any Lisper would be familiar. However, LFE has extended `cond` with additional capabilities provided via pattern matching. LFE's `cond` has the following general form when this is taken into consideration:
 
 ```lisp
 (cond (<cond-clause1>)
@@ -90,7 +90,7 @@ When we talked about ``cond`` above, we only discussed the form as any Lisper wo
       (<cond-clausen>))
 ```
 
-where each ``<cond-clause>`` could be either as it is in the regular ``cond``, ``<predicate> <expression>`` or it could be ``(?= <pattern> [<guard>] <expression>)`` -- the latter being the extended form (with an optional guard). When using the extended form, instead of evaluating a predicate for its boolean result, the data passed to the ``cond`` is matched against the defined patterns: if the pattern match succeeds, then the associated expression is evaluated. Here's an example:
+where each `<cond-clause>` could be either as it is in the regular `cond`, `<predicate> <expression>` or it could be `(?= <pattern> [<guard>] <expression>)` -- the latter being the extended form (with an optional guard). When using the extended form, instead of evaluating a predicate for its Boolean result, the data passed to the `cond` is matched against the defined patterns: if the pattern match succeeds, then the associated expression is evaluated. Here's an example:
 
 ```lisp
 (cond ((?= (cons head '()) x)
@@ -107,9 +107,9 @@ where each ``<cond-clause>`` could be either as it is in the regular ``cond``, `
 That form is not that often used, but it can be very practical.
 
 
-### The ``case`` Form
+### The `case` Form
 
-The ``case`` form is useful for situations where you want to check for multiple possible values of the same expression. Without guards, the general form for ``case`` is the following:
+The `case` form is useful for situations where you want to check for multiple possible values of the same expression. Without guards, the general form for `case` is the following:
 
 ```lisp
 (case <expression>
@@ -119,7 +119,7 @@ The ``case`` form is useful for situations where you want to check for multiple 
   (<patternn> <expressionn>))
 ```
 
-So we could rewrite the code for the non-extended ``cond`` above with the following ``case``:
+So we could rewrite the code for the non-extended `cond` above with the following `case`:
 
 ```lisp
 (case x
@@ -132,10 +132,10 @@ So we could rewrite the code for the non-extended ``cond`` above with the follow
   (_ "Anything goes"))
 ```
 
-The following will happen with the ``case`` defined above:
+The following will happen with the `case` defined above:
  * Any 1-element list will be matched by the first clause.
- * A 2-element list of ``1`` and ``2`` (in that order) will match the second clause.
- * Any list whose first element is the atom ``a`` will match the third caluse.
+ * A 2-element list of `1` and `2` (in that order) will match the second clause.
+ * Any list whose first element is the atom `a` will match the third clause.
  * Anything *not* matching the first three clauses will be matched by the fourth.
 
 With guards, the case has the following general form:
@@ -170,7 +170,7 @@ This changes the logic of the previous example in the following ways:
 
 ### Function Heads as Conditionals
 
-Another very common way to express conditional logic in LFE is through the use of pattern matching in function heads. This has the capacity to make code *very* concise while also remaining clear to read -- thus its prevelant use.
+Another very common way to express conditional logic in LFE is through the use of pattern matching in function heads. This has the capacity to make code *very* concise while also remaining clear to read -- thus its prevalent use.
 
 As we've seen, a regular LFE function takes the following form (where the arguments are optional):
 
@@ -192,9 +192,9 @@ When pattern matching in the function head, the form is as follows:
    <bodyn>))
 ```
 
-Note that simple patterns with no expressions are just regular function arguments. In other words ``<pattern1>``, ``<pattern2>``, etc., may be either a full pattern or they may be simple function arguments. The guards are optional.
+Note that simple patterns with no expressions are just regular function arguments. In other words `<pattern1>`, `<pattern2>`, etc., may be either a full pattern or they may be simple function arguments. The guards are optional.
 
-Let's try this out by rewriting the silly ``case`` example above to use a function with pattern-matching in the function heads:
+Let's try this out by rewriting the silly `case` example above to use a function with pattern-matching in the function heads:
 
 ```lisp
 (defun check-val
@@ -222,11 +222,11 @@ lfe> (check-val 42)
 "Anything goes"
 ```
 
-And there you have LFE function definitions with much of the power of ``if``, ``cond``, and ``case``!
+And there you have LFE function definitions with much of the power of `if`, `cond`, and `case`!
 
 Let's use some of these forms in actual code now ...
 
-### Example: Inches and Centimeters
+### Example: Inches and Centimetres
 
 [forthcoming]
 

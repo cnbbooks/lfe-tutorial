@@ -23,7 +23,7 @@ For those who have the need of installing multiple versions of Erlang, there is 
 
 ## Installing `make`
 
-In order to use LFE, you will be calling ``make`` to compile it. To cover your bases, you'll want to make sure you have the basic development tools installed for your platform.
+In order to use LFE, you will be calling `make` to compile it. To cover your bases, you'll want to make sure you have the basic development tools installed for your platform.
 
 Ubuntu:
 
@@ -41,5 +41,5 @@ For Mac OS X, you will need to install the "Developer Tools" from the AppStore.
 
 ## Installing `git`
 
-You will also need ``git`` to continue with this quick-start. If ``git`` doesn't come installed on your system and it wansn't installed as part of your systems basic development tools package, you can <a href="http://git-scm.com/downloads">download it here</a>
+You will also need `git` to continue with this quick-start. If `git` doesn't come installed on your system and it wasn't installed as part of your systems basic development tools package, you can <a href="http://git-scm.com/downloads">download it here</a>
 or install it using your favourite OS package manager.

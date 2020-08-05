@@ -2,7 +2,7 @@
 
 ### Creating a Simple Module
 
-A programming language isn't much use if you can only run code from a REPL. So next we will write a small LFE program in a file on the file system. In the same directory that you started the LFE REPL, create a new file called ``tut1.lfe`` (the filename is **important**: be sure you type it just as we have) using your favorite text editor.
+A programming language isn't much use if you can only run code from a REPL. So next we will write a small LFE program in a file on the file system. In the same directory that you started the LFE REPL, create a new file called `tut1.lfe` (the filename is **important**: be sure you type it just as we have) using your favourite text editor.
 
 Here's the code to enter:
 
@@ -22,7 +22,7 @@ lfe> (c "tut1.lfe")
 lfe>
 ```
 
-The ``#(module tut1)`` tells you that the compilation was successful. If it said "error" instead, you have made some mistake in the text you entered and there will also be error messages to give you some idea as to what has gone wrong so you can change what you have written and try again.
+The `#(module tut1)` tells you that the compilation was successful. If it said "error" instead, you have made some mistake in the text you entered and there will also be error messages to give you some idea as to what has gone wrong so you can change what you have written and try again.
 
 Now lets run the program.
 
@@ -32,22 +32,22 @@ lfe> (tut1:double 108)
 lfe>
 ```
 
-As expected, ``108`` doubled is 216.
+As expected, `108` doubled is 216.
 
 Now let's get back to the first two lines. LFE programs are written in files. Each file contains what we call an *LFE module*. The first line of code in the module tells LFE that we're defining a module and giving it a name:
 
 ```lisp
 (defmodule tut1
 ```
-The name of our module is ``tut1`` and the file which is used to store the module must have the same name as the module but with the ``.lfe`` extension. In our case the file name is ``tut1.lfe``.
+The name of our module is `tut1` and the file which is used to store the module must have the same name as the module but with the `.lfe` extension. In our case the file name is `tut1.lfe`.
 
-In LFE, whenever we use a function that has been defined in another module, we use the syntax, ``(module:function argument1 argument2 ...)``. So
+In LFE, whenever we use a function that has been defined in another module, we use the syntax, `(module:function argument1 argument2 ...)`. So
 
 ```lisp
 lfe> (tut1:double 108)
 ```
 
-means "call the function ``double`` in the module ``tut1`` with the argument of ``108``.
+means "call the function `double` in the module `tut1` with the argument of `108`.
 
 The second line tells LFE which functions we will be exporting -- in this case, all of them (which is only *one* ...):
 
@@ -62,11 +62,11 @@ If we wanted to be explicit about which functions were to be exported, we would 
   (export (double 1)))
 ```
 
-That says "in the module ``tut1``, please make available the function called ``double`` which takes one argument" (``x`` in our example). By "make available" we mean that this function can be called from outside the module ``tut1``.
+That says "in the module `tut1`, please make available the function called `double` which takes one argument" (`x` in our example). By "make available" we mean that this function can be called from outside the module `tut1`.
 
 ### A More Complicated Example
 
-Now for a more complicated example, the factorial of a number (e.g. factorial of 4 is 4 * 3 * 2 * 1). Enter the following code in a file called ``tut2.lfe``.
+Now for a more complicated example, the factorial of a number (e.g. factorial of 4 is 4 * 3 * 2 * 1). Enter the following code in a file called `tut2.lfe`.
 
 ```lisp
 (defmodule tut2
@@ -91,7 +91,7 @@ lfe> (tut2:fac 4)
 24
 ```
 
-The function ``fac`` contains two parts. The first part:
+The function `fac` contains two parts. The first part:
 
 ```lisp
   ((1) 1)
@@ -103,9 +103,9 @@ says that the factorial of 1 is 1. Note that this part is a separate list in the
   ((n) (* n (fac (- n 1)))))
 ```
 
-says that the factorial of n is n multiplied by the factorial of n - 1. After this part which is the last part we end the function definition with the closing ``)``.
+says that the factorial of n is n multiplied by the factorial of n - 1. After this part which is the last part we end the function definition with the closing `)`.
 
-A function can have many arguments. Let's expand the module ``tut2`` with the rather stupid function to multiply two numbers:
+A function can have many arguments. Let's expand the module `tut2` with the rather stupid function to multiply two numbers:
 
 ```lisp
 (defmodule tut3
@@ -120,7 +120,7 @@ A function can have many arguments. Let's expand the module ``tut2`` with the ra
 
 ```
 
-Note that we have also had to expand the ``(export`` line with the information that there is another function ``mult`` with two arguments. Compile the file:
+Note that we have also had to expand the `(export` line with the information that there is another function `mult` with two arguments. Compile the file:
 
 ```lisp
 lfe> (c "tut3.lfe")
@@ -133,9 +133,9 @@ lfe> (tut3:mult 3 4)
 12
 ```
 
-In the example above the numbers are integers and the arguments in the functions in the code, ``n``, ``x``, ``y`` are called variables. Examples of variables could be ``number``, ``shoe-size``, ``age`` etc.
+In the example above the numbers are integers and the arguments in the functions in the code, `n`, `x`, `y` are called variables. Examples of variables could be `number`, `shoe-size`, `age` etc.
 
-Note that when a function has only one part and all the arguments are variables then we can use the shorter form we saw in ``double`` and ``mult``. This means that we could also have written ``mult`` as:
+Note that when a function has only one part and all the arguments are variables then we can use the shorter form we saw in `double` and `mult`. This means that we could also have written `mult` as:
 
 ```lisp
 (defun mult

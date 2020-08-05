@@ -34,7 +34,7 @@ Now let's multiply two numbers in the REPL by typing ``(* 2 21)`` at the ``> `` 
 ```lisp
 lfe> (* 2 21)
 ```
-Lisp stands for "LISt Processor" because nearly everything in Lisp is reall just a list of things -- including the code itself. The lists in Lisps are created with parentheses, just like the expression above. As you can see, the multiplication operator goes first, followed by its arguments -- this is called *prefix notation*, due to the operator coming first.
+Lisp stands for "**LIS**t **P**rocessor" because nearly everything in Lisp is really just a list of things -- including the code itself. The lists in Lisps are created with parentheses, just like the expression above. As you can see, the multiplication operator goes first, followed by its arguments -- this is called *prefix notation*, due to the operator coming first.
 
 In order to tell the REPL that you want it to evaluate your LFE code, you need to his the ``<ENTER>`` or ``<RETURN>`` key.
 

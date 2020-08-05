@@ -21,7 +21,7 @@ DESCRIPTION
      ...
 ```
 
-If your installation of Erlang doesn't have man pages, you can always find what you're looking for on the documentation web site. Here is the online manpage for the [io module](http://erlang.org/doc/man/io.html).
+If your installation of Erlang doesn't have man pages, you can always find what you're looking for on the documentation web site. Here is the online `man` page for the [io module](http://erlang.org/doc/man/io.html).
 
 ### Module and Function Tab-Completion in the REPL
 
