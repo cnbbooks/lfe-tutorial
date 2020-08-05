@@ -18,26 +18,37 @@ build:
 ifndef GEN
 	$(error $(BINARY_ERROR))
 endif
-	$(MAKE) backup-book-git
+	@echo " >> Rebuilding book ..."
+	@$(MAKE) backup-submodule-git
 	@$(GEN) build
-	$(MAKE) restore-book-git
+	@$(MAKE) restore-submodule-git
 
 serve:
-	@$(GEN) serve
+	@bash -c "trap \"$(MAKE) serve-cleanup\" EXIT; $(GEN) serve -p $(PORT)"
+
+serve-cleanup: book-init build
 
 run: serve
 
 clean:
 	@rm -f $(PUBLISH_DIR)/README.md
 
+book-submodule:
+	@git submodule add -b master `git remote get-url --push origin` $(PUBLISH_DIR)
+	@git commit --author "LFE Maintainers <maintainers@lfe.io>" \
+		-m "Added master branch as submodule ($(PUBLISH_DIR) dir)."
+
 book-init:
 	@git submodule update --init --recursive
+	@cd $(PUBLISH_DIR) && git checkout master
 
-backup-book-git:
+backup-submodule-git:
+	@echo " >> Backup-up book's git dir ..."
 	@mkdir -p $(TMP_GIT_DIR)/
 	@mv -v $(PUBLISH_DIR)/.git $(TMP_GIT_DIR)/
 
-restore-book-git:
+restore-submodule-git:
+	@echo " >> Restoring book's git dir ..."
 	@mv -v $(TMP_GIT_DIR)/.git $(PUBLISH_DIR)/
 
 $(PUBLISH_DIR)/README.md:
@@ -48,11 +59,13 @@ $(PUBLISH_DIR)/README.md:
 publish: clean build $(PUBLISH_DIR)/README.md
 	-@cd $(PUBLISH_DIR) && \
 	git add * && \
-	git commit -am "Regenerated book content." > /dev/null && \
+	git commit --author "LFE Maintainers <maintainers@lfe.io>" \
+		-am "Regenerated book content." > /dev/null && \
 	git push origin $(PUBLISH_BRANCH) && \
 	cd -  && \
 	git add $(PUBLISH_DIR) && \
-	git commit -am "Updated submodule for recently generated book content." && \
+	git commit --author "LFE Maintainers <maintainers@lfe.io>" \
+		-am "Updated submodule for recently generated book content." && \
 	git submodule update && \
 	git push origin $(BUILDER_BRANCH)
 

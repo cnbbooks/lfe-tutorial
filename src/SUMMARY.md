@@ -1,7 +1,9 @@
-# Summary
+[The LFE Tutorial](README.md)
+[Title Page](title.md)
+[Copyright Page](front/copyright-page.md)
 
-* [The LFE Tutorial](README.md)
-* [Copyright Page](front/copyright-page.md)
+--------------------
+
 * [Introduction](introduction/README.md)
   * [About Erlang](introduction/erlang.md)
   * [About LFE](introduction/lfe.md)
