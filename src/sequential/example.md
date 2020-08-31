@@ -1,6 +1,6 @@
 ## Example: Converting Temperature
 
-Now for a larger example to consolidate what we have learnt so far. Assume we have a list of temperature readings from a number of cities in the world. Some of them are in Celsius (Centigrade) and some in Fahrenheit (as in the previous list). First let's convert them all to Celsius, then let's print out the data neatly. Save the following code to ``temp-convert.lfe``:
+Now for a larger example to consolidate what we have learnt so far. Assume we have a list of temperature readings from a number of cities in the world. Some of them are in Celsius (Centigrade) and some in Fahrenheit (as in the previous list). First let's convert them all to Celsius, then let's print out the data neatly. Save the following code to ``tut8.lfe``:
 
 ```lisp
 (defmodule tut8
