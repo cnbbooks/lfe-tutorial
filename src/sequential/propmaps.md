@@ -141,7 +141,7 @@ lfe> (tut7:blend colour-2 colour-1)
 
 This example warrants some explanation.
 
-First we define a couple macros to help with our guard tests. This is only here for convenience and to reduce syntax cluttering. Guards can be only composed of a limited set of functions, so we needed to use macros that would compile down to just the functions allowed in guards. A full treatment of Lisp macros is beyond the scope of this tutorial, but there is a lot of good material available online for learning macros, including Paul Graham's book "On Lisp."
+First we define a couple macros to help with our guard tests. This is only here for convenience and to reduce syntax cluttering. Guards can be only composed of a limited set of functions, so we needed to use macros that would compile down to just the functions allowed in guards. A full treatment of Lisp macros is beyond the scope of this tutorial, but there is a lot of good material available online for learning macros, including [Paul Graham's book "On Lisp."](http://www.paulgraham.com/onlisptext.html)
 
 ```lisp
 (defun new
