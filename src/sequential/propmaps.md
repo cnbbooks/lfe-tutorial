@@ -69,7 +69,7 @@ lfe> #M("key" 42)
 #M("key" 42)
 ```
 
-We will jump straight into the deep end with an example using some interesting features. The following example shows how we calculate alpha blending using maps to reference colour and alpha channels. Save this code as the file `colour.lfe` in the directory from which you have run the LFE REPL:
+We will jump straight into the deep end with an example using some interesting features. The following example shows how we calculate alpha blending using maps to reference colour and alpha channels. Save this code as the file `tut7.lfe` in the directory from which you have run the LFE REPL:
 
 ```lisp
 (defmodule tut7
