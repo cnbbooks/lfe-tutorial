@@ -33,6 +33,9 @@ lfe> (proplists:get_value 'poetry options "Vogon")
 Be sure to read the [module documentation](http://www.erlang.org/doc/man/proplists.html) for more information. Here's an example of our options in action:
 
 ```lisp
+(defmodule tut61
+  (export (div 2) (div 3)))
+  
 (defun div (a b)
   (div a b '()))
 
@@ -49,11 +52,13 @@ Be sure to read the [module documentation](http://www.erlang.org/doc/man/proplis
 Let's try our function without and then with various options:
 
 ```lisp
-lfe> (div 1 2)
+lfe> (c "tut61.lfe")
+#(module tut61)
+lfe> (tut61:div 1 2)
 0.5
-lfe> (div 1 2 '(#(ratio true)))
+lfe> (tut61:div 1 2 '(#(ratio true)))
 "1/2"
-lfe> (div 1 2 '(#(ratio true) #(debug true)))
+lfe> (tut61:div 1 2 '(#(ratio true) #(debug true)))
 Returning as ratio ...
 "1/2"
 ```
