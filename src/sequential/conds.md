@@ -135,7 +135,7 @@ So we could rewrite the code for the non-extended `cond` above with the followin
 The following will happen with the `case` defined above:
  * Any 1-element list will be matched by the first clause.
  * A 2-element list of `1` and `2` (in that order) will match the second clause.
- * Any list whose first element is the atom `a` will match the third clause.
+ * Any 2-element list whose first element is the atom `a` will match the third clause.
  * Anything *not* matching the first three clauses will be matched by the fourth.
 
 With guards, the case has the following general form:
