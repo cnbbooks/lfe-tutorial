@@ -2,7 +2,7 @@
 
 © 1996-2020, Ericsson AB
 
-© 2015, 2020 Robert Virding, Duncan McGreggor
+© 2015, 2020-2023 Robert Virding, Duncan McGreggor
 
 The contents of this file are subject to the Erlang Public License,
 Version 1.1, (the "License"); you may not use this file except in

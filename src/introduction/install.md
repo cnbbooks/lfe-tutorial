@@ -49,7 +49,7 @@ To build the latest unstable LFE, make sure you are on the `develop` branch:
 git checkout develop
 ```
 
-LFE is just a set of Erlang libraries, so like an Erlang project, the source code needs to be compiled to ``.beam`` files. Running ``make`` in the ``lfe`` directory will do that:
+LFE is just a set of Erlang libraries, so like an Erlang project, the source code needs to be compiled to `.beam` files. Running `make` in the `lfe` directory will do that:
 
 ```bash
 make

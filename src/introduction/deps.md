@@ -10,8 +10,8 @@ In order to write LFE scripts, libraries, and applications, you will need to ins
 
 First and foremost, you will need Erlang installed.
 
- * On Mac OS X, this is as easy as executing ```brew install erlang```
- * On Ubuntu ```apt-get install erlang```.
+ * On Mac OS X, this is as easy as executing `brew install erlang`
+ * On Ubuntu `apt-get install erlang`.
 
 You can also install Erlang from the various pre-built packages
 provided on the <a href="http://www.erlang.org/download.html">official Erlang
