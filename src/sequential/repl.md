@@ -12,16 +12,16 @@ In your system terminal window where you changed directory to the clone of the L
 
 At which point you will see output something like this:
 ```
-Erlang/OTP 23 [erts-11.0.2] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-threads:1] [hipe] [dtrace]
+Erlang/OTP 26 [erts-14.0.2] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit] [dtrace]
 
    ..-~.~_~---..
   (      \\     )    |   A Lisp-2+ on the Erlang VM
   |`-.._/_\\_.-':    |   Type (help) for usage info.
   |         g |_ \   |
   |        n    | |  |   Docs: http://docs.lfe.io/
-  |       a    / /   |   Source: http://github.com/rvirding/lfe
+  |       a    / /   |   Source: http://github.com/lfe/lfe
    \     l    |_/    |
-    \   r     /      |   LFE v1.3-dev (abort with ^G)
+    \   r     /      |   LFE v2.1.2 (abort with ^G)
      `-E___.-'
 
 lfe>

@@ -57,6 +57,8 @@ Now we call ``(format-temps rest)`` with the remainder of the list as an argumen
 
 ----
 
+#### Notes
+
 [^1] In LFE, the convention is that a comment starting with a single ``;`` is reserved for comments at the end of a line of code; lines which start with a comment use two ``;;``, as above. There are also conventions for ``;;;`` and ``;;;;`` -- to learn more about these, see [Program Development Using LFE - Rules and Conventions](http://docs.lfe.io/prog-rules/1.html) and [LFE Style Guide](http://docs.lfe.io/style-guide/1.html).
 
 [^2] LFE's ``lfe_io:format`` differs from the Erlang standard library ``io:format`` in that ``lfe_io`` displays its results using LFE-formatted data structures in its Lisp syntax; ``io`` uses the standard Erlang syntax. You may use either from LFE. ``lfe_io`` takes the same formatting parameters as ``io``, so there should be no surprises if you're coming from Erlang. For more information, be sure to read the [io:format documentation](http://www.erlang.org/doc/man/io.html#fwrite-1).

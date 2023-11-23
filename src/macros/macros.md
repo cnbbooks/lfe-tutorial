@@ -29,4 +29,6 @@ If a macro call expands into another macro call then the compiler or the top-lev
 
 ----
 
+#### Notes
+
 [^1] The extra argument `$ENV` is needed as this is where the REPL keeps its locally defined functions and macros and we need to tell `macroexpand` where to look.

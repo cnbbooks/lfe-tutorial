@@ -280,6 +280,8 @@ As you may have noticed, that program isn't the most *efficient* way of doing th
 
 ----
 
+#### Notes
+
 [^1] Way back in the prehistoric times when large, building-size computers still roamed the earth and the languages which ran on them were tiny and furry, Lisp came along with only a handful of forms: ``cons`` was one of them, and it was used to construct lists, one cell at a time.
 
 [^2] More information about this ``lists`` module is available [here](http://www.erlang.org/doc/man/lists.html).

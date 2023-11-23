@@ -82,4 +82,6 @@ We only made a change to the second clause: we assigned the value of ``head`` to
 
 ----
 
+#### Notes
+
 [^1] We are not going to apologise for that pun.

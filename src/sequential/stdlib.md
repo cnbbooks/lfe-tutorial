@@ -89,4 +89,5 @@ module_info/1    new/0            next/1           singleton/1
 size/1           smallest/1       subtract/2       take_largest/1
 take_smallest/1  to_list/1        union/1          union/2
 ```
+
 Now you can see all the *functions* that are available in the module you have selected. This is a great feature, allowing for easy use as well as exploration and discovery.

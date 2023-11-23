@@ -95,4 +95,6 @@ lfe> (eval `(let ((x 17) (y 42)) ,expr))
 
 ----
 
+#### Notes
+
 [^1] In LFE the backquote is a normal macro and is expanded at the same time as other macros. When they are parsed `` `thing`` becomes ``(backquote thing)``, ``,thing`` becomes ``(comma thing)`` and ``,@thing`` becomes ``(comma-at thing)``.
